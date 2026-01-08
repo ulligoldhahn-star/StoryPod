@@ -211,7 +211,13 @@
         </div>
 
         <div class="form-content" id="surveyForm">
-            <form id="survey">
+            <form id="survey" action="https://formsubmit.co/ulli.goldhahn@gmail.com" method="POST">
+                <!-- FormSubmit Configuration -->
+                <input type="hidden" name="_subject" value="New StoryPod Survey Response">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="https://ulligoldhahn-star.github.io/StoryPod/?success=true">
+                
                 <!-- Parent Information -->
                 <div class="question-group">
                     <label for="parentName">Your Name<span class="required">*</span></label>
@@ -342,52 +348,31 @@
     <script>
         // Handle form submission
         document.getElementById('survey').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
             // Validate that at least one feature is selected
             const features = document.querySelectorAll('input[name="features"]:checked');
             if (features.length === 0) {
+                e.preventDefault();
                 alert('Please select at least one feature that interests you.');
                 return;
             }
             
-            // Collect form data
-            const formData = new FormData(this);
-            const data = {};
-            
-            // Handle regular inputs
-            for (let [key, value] of formData.entries()) {
-                if (key === 'features') {
-                    if (!data.features) data.features = [];
-                    data.features.push(value);
-                } else {
-                    data[key] = value;
-                }
+            // Form will submit naturally to FormSubmit
+            // FormSubmit will redirect back and show success message via URL parameter
+        });
+        
+        // Check if redirected back from FormSubmit
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'true') {
+                document.getElementById('surveyForm').style.display = 'none';
+                document.getElementById('successMessage').classList.add('show');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-            
-            // Store in localStorage (simulating backend storage)
-            const existingData = JSON.parse(localStorage.getItem('surveyResponses') || '[]');
-            data.timestamp = new Date().toISOString();
-            existingData.push(data);
-            localStorage.setItem('surveyResponses', JSON.stringify(existingData));
-            
-            // Log to console (you can see this in browser dev tools)
-            console.log('Survey Response:', data);
-            console.log('All Responses:', existingData);
-            
-            // Show success message
-            document.getElementById('surveyForm').style.display = 'none';
-            document.getElementById('successMessage').classList.add('show');
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
         
         function resetForm() {
-            document.getElementById('survey').reset();
-            document.getElementById('surveyForm').style.display = 'block';
-            document.getElementById('successMessage').classList.remove('show');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Remove success parameter and reload
+            window.location.href = window.location.pathname;
         }
         
         // Add smooth hover effects
