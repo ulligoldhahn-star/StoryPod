@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Children's Product Survey - Help Us Create Magic</title>
+    <title>StoryPod Umfrage - Gestalten Sie die Zukunft mit uns</title>
     <style>
         * {
             margin: 0;
@@ -12,58 +12,71 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #156082 0%, #6D7BA0 100%);
             min-height: 100vh;
             padding: 20px;
             line-height: 1.6;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.15);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #25BAA8 0%, #156082 100%);
             color: white;
-            padding: 40px 30px;
+            padding: 60px 40px;
             text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
         }
 
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 600;
+            font-size: 2.8em;
+            margin-bottom: 16px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
         .header p {
-            font-size: 1.1em;
+            font-size: 1.2em;
             opacity: 0.95;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .form-content {
-            padding: 40px 30px;
+            padding: 50px 40px;
+            background: #ffffff;
         }
 
         .question-group {
-            margin-bottom: 35px;
+            margin-bottom: 40px;
         }
 
         .question-group label {
             display: block;
-            font-size: 1.1em;
-            color: #333;
-            margin-bottom: 12px;
-            font-weight: 500;
+            font-size: 1.15em;
+            color: #156082;
+            margin-bottom: 14px;
+            font-weight: 600;
         }
 
         .required {
-            color: #e74c3c;
+            color: #25BAA8;
             margin-left: 4px;
         }
 
@@ -73,13 +86,14 @@
         textarea,
         select {
             width: 100%;
-            padding: 14px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            padding: 16px 18px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
             font-size: 1em;
             font-family: inherit;
-            transition: all 0.3s ease;
-            background: #fafafa;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #f9fafb;
+            color: #1f2937;
         }
 
         input[type="text"]:focus,
@@ -88,47 +102,51 @@
         textarea:focus,
         select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #25BAA8;
             background: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 4px rgba(37, 186, 168, 0.1);
+            transform: translateY(-1px);
         }
 
         textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 120px;
         }
 
         .radio-group,
         .checkbox-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
 
         .radio-option,
         .checkbox-option {
             display: flex;
             align-items: center;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            padding: 16px 18px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: #fafafa;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #f9fafb;
         }
 
         .radio-option:hover,
         .checkbox-option:hover {
-            border-color: #667eea;
-            background: #f0f3ff;
+            border-color: #25BAA8;
+            background: #ecfdf5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 186, 168, 0.15);
         }
 
         .radio-option input[type="radio"],
         .checkbox-option input[type="checkbox"] {
-            margin-right: 12px;
-            width: 20px;
-            height: 20px;
+            margin-right: 14px;
+            width: 22px;
+            height: 22px;
             cursor: pointer;
+            accent-color: #25BAA8;
         }
 
         .radio-option label,
@@ -136,36 +154,38 @@
             margin: 0;
             cursor: pointer;
             flex: 1;
-            font-weight: 400;
+            font-weight: 500;
+            color: #374151;
         }
 
         .submit-btn {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 18px;
+            background: linear-gradient(135deg, #25BAA8 0%, #156082 100%);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.2em;
-            font-weight: 600;
+            border-radius: 12px;
+            font-size: 1.25em;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.3s ease;
-            margin-top: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 30px;
+            letter-spacing: 0.02em;
         }
 
         .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(37, 186, 168, 0.4);
         }
 
         .submit-btn:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
         }
 
         .success-message {
             display: none;
             text-align: center;
-            padding: 60px 30px;
+            padding: 80px 40px;
         }
 
         .success-message.show {
@@ -173,32 +193,40 @@
         }
 
         .success-icon {
-            font-size: 4em;
-            margin-bottom: 20px;
+            font-size: 5em;
+            margin-bottom: 24px;
         }
 
         .success-message h2 {
-            color: #667eea;
-            font-size: 2em;
-            margin-bottom: 15px;
+            color: #25BAA8;
+            font-size: 2.5em;
+            margin-bottom: 18px;
+            font-weight: 700;
         }
 
         .success-message p {
-            color: #666;
-            font-size: 1.1em;
+            color: #6b7280;
+            font-size: 1.2em;
+            line-height: 1.8;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
 
             .form-content {
-                padding: 30px 20px;
+                padding: 35px 25px;
             }
 
             .header {
-                padding: 30px 20px;
+                padding: 40px 25px;
+            }
+
+            .logo {
+                width: 100px;
             }
         }
     </style>
@@ -206,161 +234,175 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎮 Children's Product Survey</h1>
-            <p>Help us create the perfect interactive learning experience for kids!</p>
+            <svg class="logo" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+                <text x="100" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="white">StoryPod</text>
+            </svg>
+            <h1>Ihre Meinung zählt!</h1>
+            <p>Helfen Sie uns, das perfekte interaktive Lernerlebnis für Kinder zu schaffen</p>
         </div>
 
         <div class="form-content" id="surveyForm">
             <form id="survey" action="https://formsubmit.co/ulli.goldhahn@gmail.com" method="POST">
                 <!-- FormSubmit Configuration -->
-                <input type="hidden" name="_subject" value="New StoryPod Survey Response">
+                <input type="hidden" name="_subject" value="Neue StoryPod Umfrage">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_next" value="https://ulligoldhahn-star.github.io/StoryPod/?success=true">
+                <input type="hidden" name="_autoresponse" value="Vielen Dank für Ihre Teilnahme an unserer Umfrage! 🎉
+
+Als Dankeschön erhalten Sie hier Ihren exklusiven Gutscheincode:
+
+🎁 GUTSCHEINCODE: STORYPOD2026
+
+Dieser Code gibt Ihnen 20% Rabatt bei unserem Launch!
+
+Wir schätzen Ihr Feedback sehr und freuen uns darauf, etwas Besonderes für Ihre Familie zu schaffen.
+
+Herzliche Grüße,
+Ihr StoryPod Team">
                 
-                <!-- Parent Information -->
+                <!-- Elterninformationen -->
                 <div class="question-group">
-                    <label for="parentName">Your Name<span class="required">*</span></label>
-                    <input type="text" id="parentName" name="parentName" required>
+                    <label for="parentName">Ihr Name<span class="required">*</span></label>
+                    <input type="text" id="parentName" name="Eltern Name" required>
                 </div>
 
                 <div class="question-group">
-                    <label for="email">Email Address<span class="required">*</span></label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="email">E-Mail-Adresse<span class="required">*</span></label>
+                    <input type="email" id="email" name="E-Mail" required>
                 </div>
 
-                <!-- Child Information -->
+                <!-- Kindinformationen -->
                 <div class="question-group">
-                    <label for="childAge">Child's Age<span class="required">*</span></label>
-                    <select id="childAge" name="childAge" required>
-                        <option value="">Select age range</option>
-                        <option value="0-2">0-2 years</option>
-                        <option value="3-5">3-5 years</option>
-                        <option value="6-8">6-8 years</option>
-                        <option value="9-12">9-12 years</option>
+                    <label for="childAge">Alter Ihres Kindes<span class="required">*</span></label>
+                    <select id="childAge" name="Kindesalter" required>
+                        <option value="">Altersgruppe auswählen</option>
+                        <option value="0-2">0-2 Jahre</option>
+                        <option value="3-5">3-5 Jahre</option>
+                        <option value="6-8">6-8 Jahre</option>
+                        <option value="9-12">9-12 Jahre</option>
                     </select>
                 </div>
 
-                <!-- Usage Questions -->
+                <!-- Nutzungsfragen -->
                 <div class="question-group">
-                    <label>How often does your child engage with educational toys/games?<span class="required">*</span></label>
+                    <label>Wie oft beschäftigt sich Ihr Kind mit Lernspielzeug?<span class="required">*</span></label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" id="daily" name="frequency" value="daily" required>
-                            <label for="daily">Daily</label>
+                            <input type="radio" id="daily" name="Häufigkeit" value="Täglich" required>
+                            <label for="daily">Täglich</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="weekly" name="frequency" value="weekly">
-                            <label for="weekly">Several times a week</label>
+                            <input type="radio" id="weekly" name="Häufigkeit" value="Mehrmals pro Woche">
+                            <label for="weekly">Mehrmals pro Woche</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="occasionally" name="frequency" value="occasionally">
-                            <label for="occasionally">Occasionally</label>
+                            <input type="radio" id="occasionally" name="Häufigkeit" value="Gelegentlich">
+                            <label for="occasionally">Gelegentlich</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="rarely" name="frequency" value="rarely">
-                            <label for="rarely">Rarely</label>
+                            <input type="radio" id="rarely" name="Häufigkeit" value="Selten">
+                            <label for="rarely">Selten</label>
                         </div>
                     </div>
                 </div>
 
-                <!-- Features Interest -->
+                <!-- Funktionen -->
                 <div class="question-group">
-                    <label>Which features interest you most? (Select all that apply)<span class="required">*</span></label>
+                    <label>Welche Funktionen interessieren Sie am meisten? (Mehrfachauswahl möglich)<span class="required">*</span></label>
                     <div class="checkbox-group">
                         <div class="checkbox-option">
-                            <input type="checkbox" id="stories" name="features" value="stories">
-                            <label for="stories">📚 Interactive storytelling</label>
+                            <input type="checkbox" id="stories" name="Funktionen" value="Interaktives Geschichtenerzählen">
+                            <label for="stories">📚 Interaktives Geschichtenerzählen</label>
                         </div>
                         <div class="checkbox-option">
-                            <input type="checkbox" id="music" name="features" value="music">
-                            <label for="music">🎵 Music and songs</label>
+                            <input type="checkbox" id="music" name="Funktionen" value="Musik und Lieder">
+                            <label for="music">🎵 Musik und Lieder</label>
                         </div>
                         <div class="checkbox-option">
-                            <input type="checkbox" id="learning" name="features" value="learning">
-                            <label for="learning">🧠 Educational games</label>
+                            <input type="checkbox" id="learning" name="Funktionen" value="Lernspiele">
+                            <label for="learning">🧠 Lernspiele</label>
                         </div>
                         <div class="checkbox-option">
-                            <input type="checkbox" id="screenFree" name="features" value="screenFree">
-                            <label for="screenFree">📵 Screen-free experience</label>
+                            <input type="checkbox" id="screenFree" name="Funktionen" value="Bildschirmfreies Erlebnis">
+                            <label for="screenFree">📵 Bildschirmfreies Erlebnis</label>
                         </div>
                         <div class="checkbox-option">
-                            <input type="checkbox" id="characters" name="features" value="characters">
-                            <label for="characters">🦊 Engaging characters</label>
+                            <input type="checkbox" id="characters" name="Funktionen" value="Ansprechende Charaktere">
+                            <label for="characters">🦊 Ansprechende Charaktere</label>
                         </div>
                     </div>
                 </div>
 
                 <!-- Budget -->
                 <div class="question-group">
-                    <label for="budget">What's your budget for an interactive children's product?<span class="required">*</span></label>
-                    <select id="budget" name="budget" required>
-                        <option value="">Select price range</option>
-                        <option value="under50">Under $50</option>
-                        <option value="50-100">$50 - $100</option>
-                        <option value="100-150">$100 - $150</option>
-                        <option value="over150">Over $150</option>
+                    <label for="budget">Was ist Ihr Budget für ein interaktives Kinderprodukt?<span class="required">*</span></label>
+                    <select id="budget" name="Budget" required>
+                        <option value="">Preisklasse auswählen</option>
+                        <option value="unter 50€">Unter 50€</option>
+                        <option value="50€ - 100€">50€ - 100€</option>
+                        <option value="100€ - 150€">100€ - 150€</option>
+                        <option value="über 150€">Über 150€</option>
                     </select>
                 </div>
 
-                <!-- Screen Time Concerns -->
+                <!-- Bildschirmzeit -->
                 <div class="question-group">
-                    <label>How concerned are you about screen time?<span class="required">*</span></label>
+                    <label>Wie besorgt sind Sie über Bildschirmzeit?<span class="required">*</span></label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" id="veryConcerned" name="screenConcern" value="very" required>
-                            <label for="veryConcerned">Very concerned</label>
+                            <input type="radio" id="veryConcerned" name="Bildschirmzeit Sorge" value="Sehr besorgt" required>
+                            <label for="veryConcerned">Sehr besorgt</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="somewhatConcerned" name="screenConcern" value="somewhat">
-                            <label for="somewhatConcerned">Somewhat concerned</label>
+                            <input type="radio" id="somewhatConcerned" name="Bildschirmzeit Sorge" value="Etwas besorgt">
+                            <label for="somewhatConcerned">Etwas besorgt</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="notConcerned" name="screenConcern" value="not">
-                            <label for="notConcerned">Not very concerned</label>
+                            <input type="radio" id="notConcerned" name="Bildschirmzeit Sorge" value="Nicht sehr besorgt">
+                            <label for="notConcerned">Nicht sehr besorgt</label>
                         </div>
                     </div>
                 </div>
 
-                <!-- Open Feedback -->
+                <!-- Offenes Feedback -->
                 <div class="question-group">
-                    <label for="wishlist">What features would you love to see in an ideal children's interactive product?</label>
-                    <textarea id="wishlist" name="wishlist" placeholder="Share your thoughts..."></textarea>
+                    <label for="wishlist">Welche Funktionen würden Sie sich für ein ideales interaktives Kinderprodukt wünschen?</label>
+                    <textarea id="wishlist" name="Wunschfunktionen" placeholder="Teilen Sie uns Ihre Gedanken mit..."></textarea>
                 </div>
 
                 <div class="question-group">
-                    <label for="challenges">What challenges do you face with current children's products?</label>
-                    <textarea id="challenges" name="challenges" placeholder="Tell us about your experience..."></textarea>
+                    <label for="challenges">Welche Herausforderungen haben Sie mit aktuellen Kinderprodukten?</label>
+                    <textarea id="challenges" name="Herausforderungen" placeholder="Erzählen Sie uns von Ihren Erfahrungen..."></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn">Submit Survey</button>
+                <button type="submit" class="submit-btn">Umfrage absenden</button>
             </form>
         </div>
 
         <div class="success-message" id="successMessage">
             <div class="success-icon">✨</div>
-            <h2>Thank You!</h2>
-            <p>Your feedback has been recorded. We truly appreciate you taking the time to help us create something special for children!</p>
-            <button class="submit-btn" onclick="resetForm()" style="margin-top: 30px;">Submit Another Response</button>
+            <h2>Vielen Dank!</h2>
+            <p>Ihr Feedback wurde erfolgreich gespeichert. Wir schätzen es sehr, dass Sie sich die Zeit genommen haben, uns bei der Entwicklung etwas Besonderes für Kinder zu helfen!</p>
+            <button class="submit-btn" onclick="resetForm()" style="margin-top: 30px;">Weitere Antwort einreichen</button>
         </div>
     </div>
 
     <script>
-        // Handle form submission
+        // Formular-Validierung
         document.getElementById('survey').addEventListener('submit', function(e) {
-            // Validate that at least one feature is selected
-            const features = document.querySelectorAll('input[name="features"]:checked');
+            // Prüfen, ob mindestens eine Funktion ausgewählt wurde
+            const features = document.querySelectorAll('input[name="Funktionen"]:checked');
             if (features.length === 0) {
                 e.preventDefault();
-                alert('Please select at least one feature that interests you.');
+                alert('Bitte wählen Sie mindestens eine Funktion aus, die Sie interessiert.');
                 return;
             }
             
-            // Form will submit naturally to FormSubmit
-            // FormSubmit will redirect back and show success message via URL parameter
+            // Formular wird an FormSubmit gesendet
         });
         
-        // Check if redirected back from FormSubmit
+        // Erfolgsanzeige nach Weiterleitung
         window.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('success') === 'true') {
@@ -371,11 +413,10 @@
         });
         
         function resetForm() {
-            // Remove success parameter and reload
             window.location.href = window.location.pathname;
         }
         
-        // Add smooth hover effects
+        // Interaktive Radio/Checkbox Optionen
         document.querySelectorAll('.radio-option, .checkbox-option').forEach(option => {
             option.addEventListener('click', function() {
                 const input = this.querySelector('input');
