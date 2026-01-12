@@ -79,7 +79,7 @@
         }
 
         .progress-container {
-            margin: 0 40px 30px;
+            margin: 0 40px 20px;
             padding: 20px;
             background: white;
             border-radius: 12px;
@@ -210,7 +210,7 @@
             font-size: 1em;
             font-family: inherit;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: #f9fafb;
+            background: #97A4C4;
             color: #1f2937;
         }
 
@@ -630,7 +630,7 @@
             </div>
 
             <div class="nav-buttons">
-                <button class="btn btn-primary" onclick="nextPage()">Los geht's, ich bin dabei! →</button>
+                <button class="btn btn-primary" onclick="nextPage()">Los geht's, ich bin dabei!</button>
             </div>
         </div>
 
@@ -671,34 +671,32 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Toniebox</th>
-                            <th>Tigerbox</th>
-                            <th>Yoto Player</th>
+                            <th>Nicht bekannt</th>
+                            <th>Kenne ich</th>
+                            <th>Haben wir</th>
+                            <th>Nutzen wir aktiv</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Nicht bekannt</td>
+                            <td>Toniebox</td>
                             <td><input type="checkbox" name="Audio-Systeme" value="Toniebox - Nicht bekannt"></td>
-                            <td><input type="checkbox" name="Audio-Systeme" value="Tigerbox - Nicht bekannt"></td>
-                            <td><input type="checkbox" name="Audio-Systeme" value="Yoto - Nicht bekannt"></td>
-                        </tr>
-                        <tr>
-                            <td>Kenne ich</td>
                             <td><input type="checkbox" name="Audio-Systeme" value="Toniebox - Kenne ich"></td>
-                            <td><input type="checkbox" name="Audio-Systeme" value="Tigerbox - Kenne ich"></td>
-                            <td><input type="checkbox" name="Audio-Systeme" value="Yoto - Kenne ich"></td>
-                        </tr>
-                        <tr>
-                            <td>Haben wir</td>
                             <td><input type="checkbox" name="Audio-Systeme" value="Toniebox - Haben wir"></td>
-                            <td><input type="checkbox" name="Audio-Systeme" value="Tigerbox - Haben wir"></td>
-                            <td><input type="checkbox" name="Audio-Systeme" value="Yoto - Haben wir"></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Toniebox - Nutzen aktiv"></td>
                         </tr>
                         <tr>
-                            <td>Nutzen wir aktiv</td>
-                            <td><input type="checkbox" name="Audio-Systeme" value="Toniebox - Nutzen aktiv"></td>
+                            <td>Tigerbox</td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Tigerbox - Nicht bekannt"></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Tigerbox - Kenne ich"></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Tigerbox - Haben wir"></td>
                             <td><input type="checkbox" name="Audio-Systeme" value="Tigerbox - Nutzen aktiv"></td>
+                        </tr>
+                        <tr>
+                            <td>Yoto Player</td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Yoto - Nicht bekannt"></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Yoto - Kenne ich"></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Yoto - Haben wir"></td>
                             <td><input type="checkbox" name="Audio-Systeme" value="Yoto - Nutzen aktiv"></td>
                         </tr>
                     </tbody>
@@ -706,8 +704,8 @@
             </div>
 
             <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevPage()">← Zurück</button>
-                <button class="btn btn-primary" onclick="nextPage()">Weiter →</button>
+                <button class="btn btn-secondary" onclick="prevPage()">Zurück</button>
+                <button class="btn btn-primary" onclick="nextPage()">Weiter</button>
             </div>
         </div>
 
@@ -878,8 +876,8 @@
             </div>
 
             <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevPage()">← Zurück</button>
-                <button class="btn btn-primary" onclick="nextPage()">Weiter →</button>
+                <button class="btn btn-secondary" onclick="prevPage()">Zurück</button>
+                <button class="btn btn-primary" onclick="nextPage()">Weiter</button>
             </div>
         </div>
 
@@ -974,8 +972,8 @@
             </div>
 
             <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevPage()">← Zurück</button>
-                <button class="btn btn-primary" onclick="nextPage()">Weiter →</button>
+                <button class="btn btn-secondary" onclick="prevPage()">Zurück</button>
+                <button class="btn btn-primary" onclick="nextPage()">Weiter</button>
             </div>
         </div>
 
@@ -1041,8 +1039,8 @@
             </div>
 
             <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevPage()">← Zurück</button>
-                <button class="btn btn-primary" onclick="nextPage()">Weiter →</button>
+                <button class="btn btn-secondary" onclick="prevPage()">Zurück</button>
+                <button class="btn btn-primary" onclick="nextPage()">Weiter</button>
             </div>
         </div>
 
@@ -1263,7 +1261,6 @@
 
         function updateTuningRanking() {
             const container = document.getElementById('selectedTuning');
-            // Get currently checked tuning checkboxes
             const checkedTuning = document.querySelectorAll('#tuningOptions input[type="checkbox"]:checked');
             selectedTuning = Array.from(checkedTuning).map(cb => cb.value);
             
@@ -1281,13 +1278,13 @@
             
             container.innerHTML = html;
             
-            // Add drag and drop functionality
             const items = container.querySelectorAll('.draggable-item');
             items.forEach(item => {
                 item.addEventListener('dragstart', handleDragStart);
                 item.addEventListener('dragover', handleDragOver);
                 item.addEventListener('drop', handleDrop);
                 item.addEventListener('dragend', handleDragEnd);
+                item.addEventListener('dragenter', handleDragEnter);
             });
         }
 
@@ -1297,31 +1294,39 @@
             draggedItem = this;
             this.classList.add('dragging');
             e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
         }
 
         function handleDragOver(e) {
-            if (e.preventDefault) {
-                e.preventDefault();
-            }
+            e.preventDefault();
             e.dataTransfer.dropEffect = 'move';
             return false;
         }
 
-        function handleDrop(e) {
-            if (e.stopPropagation) {
-                e.stopPropagation();
+        function handleDragEnter(e) {
+            if (this !== draggedItem) {
+                this.classList.add('drag-over');
             }
+        }
+
+        function handleDrop(e) {
+            e.stopPropagation();
+            e.preventDefault();
             
-            if (draggedItem !== this) {
-                const allItems = [...document.querySelectorAll('#selectedTuning .draggable-item')];
+            if (draggedItem && draggedItem !== this) {
+                const container = document.getElementById('selectedTuning');
+                const allItems = [...container.querySelectorAll('.draggable-item')];
                 const draggedIndex = allItems.indexOf(draggedItem);
                 const targetIndex = allItems.indexOf(this);
                 
-                const draggedValue = selectedTuning[draggedIndex];
-                selectedTuning.splice(draggedIndex, 1);
-                selectedTuning.splice(targetIndex, 0, draggedValue);
-                
-                updateTuningRanking();
+                if (draggedIndex !== -1 && targetIndex !== -1) {
+                    const draggedValue = selectedTuning[draggedIndex];
+                    selectedTuning.splice(draggedIndex, 1);
+                    selectedTuning.splice(targetIndex, 0, draggedValue);
+                    
+                    allItems.forEach(item => item.classList.remove('drag-over'));
+                    updateTuningRanking();
+                }
             }
             
             return false;
@@ -1329,6 +1334,8 @@
 
         function handleDragEnd(e) {
             this.classList.remove('dragging');
+            const allItems = document.querySelectorAll('#selectedTuning .draggable-item');
+            allItems.forEach(item => item.classList.remove('drag-over'));
         }
 
         // Image option selection
