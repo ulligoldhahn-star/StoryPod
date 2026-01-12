@@ -131,7 +131,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            opacity: 0.18;
+            opacity: 0.25;
             pointer-events: none;
             z-index: 0;
         }
@@ -153,7 +153,7 @@
             background-image: url('bilder/story134.png');
             height: 50%;
             bottom: 50%;
-            opacity: 0.18;
+            opacity: 0.25;
         }
 
         #page2::after {
@@ -167,7 +167,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            opacity: 0.18;
+            opacity: 0.25;
             pointer-events: none;
             z-index: 0;
         }
@@ -1637,38 +1637,9 @@
             document.querySelectorAll('.max-3-checkbox').forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
                     const group = this.getAttribute('data-group');
-                    const checked = document.querySelectorAll(`.max-3-checkbox[data-group="${group}"]:checked`);
                     
-                    if (checked.length > 3) {
-                        this.checked = false;
-                        return;
-                    }
-                    
-                    // Disable unchecked boxes if 3 are selected
-                    const allInGroup = document.querySelectorAll(`.max-3-checkbox[data-group="${group}"]`);
-                    allInGroup.forEach(cb => {
-                        if (!cb.checked && checked.length >= 3) {
-                            cb.disabled = true;
-                            const parent = cb.closest('.checkbox-option') || cb.closest('.image-option');
-                            if (parent) {
-                                if (parent.classList.contains('image-option')) {
-                                    parent.classList.add('disabled');
-                                } else {
-                                    parent.style.opacity = '0.5';
-                                }
-                            }
-                        } else if (!cb.checked) {
-                            cb.disabled = false;
-                            const parent = cb.closest('.checkbox-option') || cb.closest('.image-option');
-                            if (parent) {
-                                if (parent.classList.contains('image-option')) {
-                                    parent.classList.remove('disabled');
-                                } else {
-                                    parent.style.opacity = '1';
-                                }
-                            }
-                        }
-                    });
+                    // Update disabled state for all checkboxes in this group
+                    updateGroupCheckboxes(group);
                     
                     // Update ranking for tuning group
                     if (group === 'tuning') {
@@ -1676,6 +1647,38 @@
                     }
                 });
             });
+            
+            // Helper function to update checkbox states in a group
+            function updateGroupCheckboxes(group) {
+                const allInGroup = document.querySelectorAll(`.max-3-checkbox[data-group="${group}"]`);
+                const checked = document.querySelectorAll(`.max-3-checkbox[data-group="${group}"]:checked`);
+                
+                allInGroup.forEach(cb => {
+                    const parent = cb.closest('.checkbox-option') || cb.closest('.image-option');
+                    
+                    if (!cb.checked && checked.length >= 3) {
+                        // Disable unchecked boxes when 3 are already selected
+                        cb.disabled = true;
+                        if (parent) {
+                            if (parent.classList.contains('image-option')) {
+                                parent.classList.add('disabled');
+                            } else {
+                                parent.style.opacity = '0.5';
+                            }
+                        }
+                    } else {
+                        // Enable all other boxes
+                        cb.disabled = false;
+                        if (parent) {
+                            if (parent.classList.contains('image-option')) {
+                                parent.classList.remove('disabled');
+                            } else {
+                                parent.style.opacity = '1';
+                            }
+                        }
+                    }
+                });
+            }
         });
 
         // Tuning feature selection with ranking
