@@ -32,32 +32,35 @@
             background: linear-gradient(135deg, #25BAA8 0%, #156082 100%);
             color: white;
             padding: 60px 40px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .header-text {
+            flex: 1;
+            text-align: left;
         }
 
         .logo {
-            max-width: 180px;
+            max-width: 280px;
             height: auto;
-            margin-bottom: 24px;
-            border-radius: 16px;
-            background: white;
-            padding: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            flex-shrink: 0;
         }
 
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 16px;
+            font-size: 2.8em;
+            margin-bottom: 20px;
             font-weight: 700;
             letter-spacing: -0.02em;
+            line-height: 1.2;
         }
 
         .header p {
-            font-size: 1.15em;
+            font-size: 1.2em;
             opacity: 0.95;
-            line-height: 1.7;
-            max-width: 700px;
-            margin: 0 auto;
+            line-height: 1.6;
         }
 
         .intro-box {
@@ -77,18 +80,22 @@
 
         .progress-container {
             margin: 0 40px 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         }
 
         .progress-bar {
             background: #e5e7eb;
-            height: 6px;
-            border-radius: 3px;
+            height: 12px;
+            border-radius: 6px;
             overflow: hidden;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .progress-fill {
-            background: linear-gradient(90deg, #25BAA8 0%, #156082 100%);
+            background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
             height: 100%;
             width: 0%;
             transition: width 0.5s ease;
@@ -104,10 +111,62 @@
         .page {
             display: none;
             padding: 40px;
+            position: relative;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
         .page.active {
             display: block;
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: 400px;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        #page0::before {
+            background-image: url('bilder/storypod_123.png');
+        }
+
+        #page1::before {
+            background-image: url('bilder/kind_storypodt.png');
+        }
+
+        #page2::before {
+            background-image: url('bilder/story134.png');
+        }
+
+        #page3::before {
+            background-image: url('bilder/storypodasd.png');
+        }
+
+        #page4::before {
+            background-image: url('bilder/storypodjk.png');
+        }
+
+        #page5::before {
+            background-image: url('bilder/storypodqpi.png');
+        }
+
+        #pageSuccess::before {
+            background-image: url('bilder/storypodrhkl.png');
         }
 
         .section-title {
@@ -336,6 +395,17 @@
             transform: translateY(-4px);
         }
 
+        .image-option.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .image-option.disabled:hover {
+            transform: none;
+            border-color: #e5e7eb;
+            background: #f9fafb;
+        }
+
         .image-option input {
             display: none;
         }
@@ -478,18 +548,26 @@
         }
 
         .required-note {
-            background: #fef3c7;
-            border-left: 3px solid #f59e0b;
-            padding: 12px 16px;
-            border-radius: 8px;
+            padding: 12px 0;
             margin-top: 30px;
-            font-size: 0.9em;
-            color: #92400e;
+            font-size: 0.85em;
+            color: #9ca3af;
+            font-style: italic;
         }
 
         @media (max-width: 768px) {
             .header {
                 padding: 40px 25px;
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .header-text {
+                text-align: center;
+            }
+
+            .logo {
+                max-width: 200px;
             }
 
             .header h1 {
@@ -498,6 +576,11 @@
 
             .page {
                 padding: 30px 25px;
+            }
+
+            .page::before {
+                background-size: 250px;
+                opacity: 0.05;
             }
 
             .intro-box {
@@ -517,9 +600,11 @@
 <body>
     <div class="container">
         <div class="header">
+            <div class="header-text">
+                <h1>Dein Storypod,<br>deine Meinung</h1>
+                <p>Gestalte mit uns die Zukunft des Lernens!</p>
+            </div>
             <img src="Designer(2).png" alt="Storypod Logo" class="logo">
-            <h1>Dein Storypod, deine Meinung</h1>
-            <p>Gestalte mit uns die Zukunft des Lernens!</p>
         </div>
 
         <div class="progress-container">
@@ -585,42 +670,36 @@
                 <table class="matrix-table">
                     <thead>
                         <tr>
-                            <th>Marke</th>
-                            <th>Kenne ich</th>
-                            <th>Haben wir</th>
-                            <th>Nutzen wir aktiv</th>
+                            <th></th>
+                            <th>Toniebox</th>
+                            <th>Tigerbox</th>
+                            <th>Yoto Player</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Toniebox</td>
-                            <td><input type="checkbox" name="Toniebox - Kenne ich" value="Ja"></td>
-                            <td><input type="checkbox" name="Toniebox - Haben wir" value="Ja"></td>
-                            <td><input type="checkbox" name="Toniebox - Nutzen aktiv" value="Ja"></td>
-                        </tr>
-                        <tr>
-                            <td>Tigerbox</td>
-                            <td><input type="checkbox" name="Tigerbox - Kenne ich" value="Ja"></td>
-                            <td><input type="checkbox" name="Tigerbox - Haben wir" value="Ja"></td>
-                            <td><input type="checkbox" name="Tigerbox - Nutzen aktiv" value="Ja"></td>
-                        </tr>
-                        <tr>
-                            <td>Yoto Player</td>
-                            <td><input type="checkbox" name="Yoto - Kenne ich" value="Ja"></td>
-                            <td><input type="checkbox" name="Yoto - Haben wir" value="Ja"></td>
-                            <td><input type="checkbox" name="Yoto - Nutzen aktiv" value="Ja"></td>
-                        </tr>
-                        <tr>
-                            <td>Keines davon</td>
-                            <td><input type="checkbox" name="Keines - Kenne ich" value="Ja"></td>
-                            <td><input type="checkbox" name="Keines - Haben wir" value="Ja"></td>
-                            <td><input type="checkbox" name="Keines - Nutzen aktiv" value="Ja"></td>
-                        </tr>
-                        <tr>
                             <td>Nicht bekannt</td>
-                            <td><input type="checkbox" id="nichtBekannt" name="Nicht bekannt" value="Ja"></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Toniebox - Nicht bekannt"></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Tigerbox - Nicht bekannt"></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Yoto - Nicht bekannt"></td>
+                        </tr>
+                        <tr>
+                            <td>Kenne ich</td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Toniebox - Kenne ich"></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Tigerbox - Kenne ich"></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Yoto - Kenne ich"></td>
+                        </tr>
+                        <tr>
+                            <td>Haben wir</td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Toniebox - Haben wir"></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Tigerbox - Haben wir"></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Yoto - Haben wir"></td>
+                        </tr>
+                        <tr>
+                            <td>Nutzen wir aktiv</td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Toniebox - Nutzen aktiv"></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Tigerbox - Nutzen aktiv"></td>
+                            <td><input type="checkbox" name="Audio-Systeme" value="Yoto - Nutzen aktiv"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -731,13 +810,27 @@
 
             <div class="question-group">
                 <label class="question-label">5. Die Bedienung durch dein Kind: Wie intuitiv waren die Knöpfe?<span class="required">*</span></label>
-                <p class="note-text">Falls du mehrere Kinder mit unterschiedlichem Alter hast, beantworte diese Frage bitte für jede relevante Altersgruppe separat im Textfeld oder wähle die durchschnittliche Erfahrung.</p>
-                
-                <div id="easeContainer"></div>
-                
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="ease1" name="Bedienungsfreundlichkeit" value="Super einfach" required>
+                        <label for="ease1">Super einfach, sofort verstanden</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="ease2" name="Bedienungsfreundlichkeit" value="Okay">
+                        <label for="ease2">Okay, brauchte etwas Übung</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="ease3" name="Bedienungsfreundlichkeit" value="Eher schwierig">
+                        <label for="ease3">Eher schwierig</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="ease4" name="Bedienungsfreundlichkeit" value="Nicht selbst bedient">
+                        <label for="ease4">Nicht selbst bedient</label>
+                    </div>
+                </div>
                 <div style="margin-top: 20px;">
-                    <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Zusätzliche Anmerkungen zu verschiedenen Altersgruppen (optional):</label>
-                    <textarea name="Bedienung - Details nach Altersgruppe" placeholder="z.B. 'Kind 3 Jahre: sehr einfach, Kind 6 Jahre: brauchte Übung'" style="min-height: 80px;"></textarea>
+                    <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Falls du mehrere Kinder unterschiedlichen Alters hast, kannst du hier Details ergänzen (optional):</label>
+                    <textarea name="Bedienung - Details" placeholder="z.B. 'Kind 3 Jahre: sehr einfach, Kind 6 Jahre: brauchte Übung'" style="min-height: 80px;"></textarea>
                 </div>
             </div>
 
@@ -746,35 +839,35 @@
                 <p class="note-text">Wähle bis zu 3 Eigenschaften aus und ziehe sie in die gewünschte Reihenfolge (wichtigste oben).</p>
                 <div class="image-choice" id="tuningOptions">
                     <label class="image-option">
-                        <input type="checkbox" name="Tuning-Wunsch" value="Mehr Farben/Designs">
+                        <input type="checkbox" name="Tuning-Wunsch" value="Mehr Farben/Designs" class="max-3-checkbox" data-group="tuning">
                         <div>
                             <div class="emoji">🎨</div>
                             <div>Mehr Farben/Designs für die Hüllen</div>
                         </div>
                     </label>
                     <label class="image-option">
-                        <input type="checkbox" name="Tuning-Wunsch" value="Noch robuster">
+                        <input type="checkbox" name="Tuning-Wunsch" value="Noch robuster" class="max-3-checkbox" data-group="tuning">
                         <div>
                             <div class="emoji">🧱</div>
                             <div>Noch robuster machen</div>
                         </div>
                     </label>
                     <label class="image-option">
-                        <input type="checkbox" name="Tuning-Wunsch" value="Besserer Lautsprecher">
+                        <input type="checkbox" name="Tuning-Wunsch" value="Besserer Lautsprecher" class="max-3-checkbox" data-group="tuning">
                         <div>
                             <div class="emoji">🔊</div>
                             <div>Bessere Qualität des Lautsprechers</div>
                         </div>
                     </label>
                     <label class="image-option">
-                        <input type="checkbox" name="Tuning-Wunsch" value="Längere Akkulaufzeit">
+                        <input type="checkbox" name="Tuning-Wunsch" value="Längere Akkulaufzeit" class="max-3-checkbox" data-group="tuning">
                         <div>
                             <div class="emoji">🔋</div>
                             <div>Noch längere Akkulaufzeit</div>
                         </div>
                     </label>
                     <label class="image-option">
-                        <input type="checkbox" name="Tuning-Wunsch" value="Besseres Mikrofon">
+                        <input type="checkbox" name="Tuning-Wunsch" value="Besseres Mikrofon" class="max-3-checkbox" data-group="tuning">
                         <div>
                             <div class="emoji">🎤</div>
                             <div>Hochwertigeres Mikrofon</div>
@@ -798,25 +891,25 @@
             <div class="question-group">
                 <label class="question-label">7. Was ist dein Hauptziel bei der Nutzung von Storypod? Ordne die folgenden Ziele nach ihrer Wichtigkeit für dich.<span class="required">*</span></label>
                 <p style="color: #6b7280; margin-bottom: 16px; font-style: italic;">Wähle deine Top 3 aus:</p>
-                <div class="checkbox-group">
+                <div class="checkbox-group" id="hauptzieleGroup">
                     <div class="checkbox-option">
-                        <input type="checkbox" name="Hauptziele" value="Spielerisch lernen">
+                        <input type="checkbox" name="Hauptziele" value="Spielerisch lernen" class="max-3-checkbox" data-group="hauptziele">
                         <label>Mein Kind soll spielerisch etwas lernen (Sprache, Wissen)</label>
                     </div>
                     <div class="checkbox-option">
-                        <input type="checkbox" name="Hauptziele" value="Bildschirmzeit reduzieren">
+                        <input type="checkbox" name="Hauptziele" value="Bildschirmzeit reduzieren" class="max-3-checkbox" data-group="hauptziele">
                         <label>Ich möchte die Bildschirmzeit reduzieren</label>
                     </div>
                     <div class="checkbox-option">
-                        <input type="checkbox" name="Hauptziele" value="Selbstbeschäftigung">
+                        <input type="checkbox" name="Hauptziele" value="Selbstbeschäftigung" class="max-3-checkbox" data-group="hauptziele">
                         <label>Mein Kind soll sich sinnvoll allein beschäftigen können</label>
                     </div>
                     <div class="checkbox-option">
-                        <input type="checkbox" name="Hauptziele" value="Einschlafroutinen">
+                        <input type="checkbox" name="Hauptziele" value="Einschlafroutinen" class="max-3-checkbox" data-group="hauptziele">
                         <label>Einschlafroutinen sollen einfacher werden</label>
                     </div>
                     <div class="checkbox-option">
-                        <input type="checkbox" name="Hauptziele" value="Spaß und Unterhaltung">
+                        <input type="checkbox" name="Hauptziele" value="Spaß und Unterhaltung" class="max-3-checkbox" data-group="hauptziele">
                         <label>Mein Kind soll einfach nur Spaß und Unterhaltung haben</label>
                     </div>
                 </div>
@@ -825,29 +918,29 @@
             <div class="question-group">
                 <label class="question-label">8. Die Storypod-App soll Eltern Superkräfte verleihen. Welche Funktionen wären für dich in der App am wichtigsten?<span class="required">*</span></label>
                 <p style="color: #6b7280; margin-bottom: 16px; font-style: italic;">Wähle deine Top 3 aus:</p>
-                <div class="checkbox-group">
+                <div class="checkbox-group" id="appFunktionenGroup">
                     <div class="checkbox-option">
-                        <input type="checkbox" name="App-Funktionen" value="Schlaf-Routinen">
+                        <input type="checkbox" name="App-Funktionen" value="Schlaf-Routinen" class="max-3-checkbox" data-group="appfunktionen">
                         <label>Detaillierte Schlaf-Routinen: Zeitgesteuertes Nachtlicht, Schlafmelodien, White-Noise</label>
                     </div>
                     <div class="checkbox-option">
-                        <input type="checkbox" name="App-Funktionen" value="Lern-Dashboard">
+                        <input type="checkbox" name="App-Funktionen" value="Lern-Dashboard" class="max-3-checkbox" data-group="appfunktionen">
                         <label>Lern-Dashboard: Sehen, was mein Kind gelernt hat und Fortschritte verfolgen</label>
                     </div>
                     <div class="checkbox-option">
-                        <input type="checkbox" name="App-Funktionen" value="Guthaben & Shop">
+                        <input type="checkbox" name="App-Funktionen" value="Guthaben & Shop" class="max-3-checkbox" data-group="appfunktionen">
                         <label>Guthaben & Shop: Einfacher Kauf von neuen Inhalten direkt in der App</label>
                     </div>
                     <div class="checkbox-option">
-                        <input type="checkbox" name="App-Funktionen" value="Creator Studio">
+                        <input type="checkbox" name="App-Funktionen" value="Creator Studio" class="max-3-checkbox" data-group="appfunktionen">
                         <label>"Creator Studio": Eigene Geschichten mit Effekten aufnehmen oder per KI erstellen</label>
                     </div>
                     <div class="checkbox-option">
-                        <input type="checkbox" name="App-Funktionen" value="Lautstärkeregelung">
+                        <input type="checkbox" name="App-Funktionen" value="Lautstärkeregelung" class="max-3-checkbox" data-group="appfunktionen">
                         <label>Intelligente Lautstärkeregelung: Maximale Lautstärke festlegen</label>
                     </div>
                     <div class="checkbox-option">
-                        <input type="checkbox" name="App-Funktionen" value="Mehrere Kinder">
+                        <input type="checkbox" name="App-Funktionen" value="Mehrere Kinder" class="max-3-checkbox" data-group="appfunktionen">
                         <label>Mehrere Kinder verwalten: Eigene Profile für jedes Geschwisterkind</label>
                     </div>
                 </div>
@@ -921,9 +1014,11 @@
 
             <div class="question-group">
                 <label class="question-label">13. Stell dir vor, es gäbe ein "Storypod Club-Abo" für 9,99 €/Monat, das dir jeden Monat neue, exklusive Inhalte freischaltet und Rabatte auf Zubehör gibt. Wie klingt das für dich?<span class="required">*</span></label>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; color: #6b7280; font-size: 0.9em;">
-                    <span>Absolut uninteressant</span>
-                    <span>Klingt super!</span>
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; color: #6b7280; font-size: 0.9em; margin-bottom: 8px;">
+                        <span>Absolut uninteressant</span>
+                        <span>Klingt super!</span>
+                    </div>
                 </div>
                 <div class="star-rating">
                     <input type="radio" name="Abo-Interesse" id="sub5" value="5" required>
@@ -958,8 +1053,8 @@
                 <h2>Du hast es geschafft!</h2>
                 <p>Ein riesengroßes Dankeschön vom gesamten Storypod-Team! Du hast uns enorm geholfen.</p>
                 
-                <div class="question-group" style="text-align: left; max-width: 500px; margin: 30px auto;">
-                    <label class="question-label">Um deinen exklusiven 30% Rabatt-Code zu erhalten, trage bitte hier deine E-Mail-Adresse ein:</label>
+                <div class="question-group" style="text-align: center; max-width: 500px; margin: 30px auto;">
+                    <label class="question-label" style="text-align: center;">Um deinen exklusiven 30% Rabatt-Code zu erhalten, trage bitte hier deine E-Mail-Adresse ein:</label>
                     <input type="email" id="finalEmail" name="E-Mail" placeholder="deine@email.de" style="margin-bottom: 20px;">
                     
                     <div class="checkbox-option">
@@ -990,7 +1085,7 @@
 
     <script>
         let currentPage = 0;
-        const totalPages = 6;
+        const totalPages = 7;
 
         function updateProgress() {
             const progress = Math.round((currentPage / totalPages) * 100);
@@ -1008,7 +1103,7 @@
                 }
                 
                 // Check if at least one checkbox in audio systems matrix is checked
-                const audioChecked = document.querySelectorAll('.matrix-table input[type="checkbox"]:checked');
+                const audioChecked = document.querySelectorAll('input[name="Audio-Systeme"]:checked');
                 if (audioChecked.length === 0) {
                     alert('Bitte wähle mindestens eine Option bei Frage 2 (Audio-Systeme) aus.');
                     return;
@@ -1035,16 +1130,8 @@
                     alert('Bitte wähle mindestens ein Hauptziel aus.');
                     return;
                 }
-                if (goals.length > 3) {
-                    alert('Bitte wähle maximal 3 Hauptziele aus.');
-                    return;
-                }
                 if (appFeatures.length === 0) {
                     alert('Bitte wähle mindestens eine App-Funktion aus.');
-                    return;
-                }
-                if (appFeatures.length > 3) {
-                    alert('Bitte wähle maximal 3 App-Funktionen aus.');
                     return;
                 }
             }
@@ -1125,66 +1212,61 @@
             });
         });
 
-        // Create ease of use options based on selected family members
-        function createEaseOptions() {
-            const familyChecked = document.querySelectorAll('input[name="Familie"]:checked');
-            const container = document.getElementById('easeContainer');
-            
-            if (familyChecked.length === 0) {
-                container.innerHTML = '<div class="radio-group"><div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Allgemein - Super einfach" required><label>Super einfach, sofort verstanden</label></div><div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Allgemein - Okay"><label>Okay, brauchte etwas Übung</label></div><div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Allgemein - Schwierig"><label>Eher schwierig</label></div><div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Nicht selbst bedient"><label>Nicht selbst bedient</label></div></div>';
-            } else {
-                let html = '<div class="radio-group">';
-                html += '<div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Allgemein - Super einfach" required><label>Super einfach für alle Altersgruppen</label></div>';
-                html += '<div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Allgemein - Okay"><label>Okay für alle Altersgruppen</label></div>';
-                html += '<div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Unterschiedlich"><label>Unterschiedlich je nach Altersgruppe (siehe Textfeld unten)</label></div>';
-                html += '<div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Nicht selbst bedient"><label>Nicht selbst bedient</label></div>';
-                html += '</div>';
-                container.innerHTML = html;
-            }
-        }
-
-        // Initialize ease options when page 2 becomes active
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.target.id === 'page2' && mutation.target.classList.contains('active')) {
-                    createEaseOptions();
-                }
+        // Max 3 Checkbox Limit Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.max-3-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const group = this.getAttribute('data-group');
+                    const checked = document.querySelectorAll(`.max-3-checkbox[data-group="${group}"]:checked`);
+                    
+                    if (checked.length > 3) {
+                        this.checked = false;
+                        return;
+                    }
+                    
+                    // Disable unchecked boxes if 3 are selected
+                    const allInGroup = document.querySelectorAll(`.max-3-checkbox[data-group="${group}"]`);
+                    allInGroup.forEach(cb => {
+                        if (!cb.checked && checked.length >= 3) {
+                            cb.disabled = true;
+                            const parent = cb.closest('.checkbox-option') || cb.closest('.image-option');
+                            if (parent) {
+                                if (parent.classList.contains('image-option')) {
+                                    parent.classList.add('disabled');
+                                } else {
+                                    parent.style.opacity = '0.5';
+                                }
+                            }
+                        } else if (!cb.checked) {
+                            cb.disabled = false;
+                            const parent = cb.closest('.checkbox-option') || cb.closest('.image-option');
+                            if (parent) {
+                                if (parent.classList.contains('image-option')) {
+                                    parent.classList.remove('disabled');
+                                } else {
+                                    parent.style.opacity = '1';
+                                }
+                            }
+                        }
+                    });
+                    
+                    // Update ranking for tuning group
+                    if (group === 'tuning') {
+                        updateTuningRanking();
+                    }
+                });
             });
         });
 
-        const page2 = document.getElementById('page2');
-        if (page2) {
-            observer.observe(page2, { attributes: true, attributeFilter: ['class'] });
-        }
-
         // Tuning feature selection with ranking
         let selectedTuning = [];
-        
-        function initTuningCheckboxes() {
-            document.querySelectorAll('#tuningOptions input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        if (selectedTuning.length >= 3) {
-                            this.checked = false;
-                            alert('Du kannst maximal 3 Eigenschaften auswählen.');
-                            return;
-                        }
-                        selectedTuning.push(this.value);
-                        this.closest('.image-option').classList.add('selected');
-                    } else {
-                        selectedTuning = selectedTuning.filter(item => item !== this.value);
-                        this.closest('.image-option').classList.remove('selected');
-                    }
-                    updateTuningRanking();
-                });
-            });
-        }
-        
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', initTuningCheckboxes);
 
         function updateTuningRanking() {
             const container = document.getElementById('selectedTuning');
+            // Get currently checked tuning checkboxes
+            const checkedTuning = document.querySelectorAll('#tuningOptions input[type="checkbox"]:checked');
+            selectedTuning = Array.from(checkedTuning).map(cb => cb.value);
+            
             if (selectedTuning.length === 0) {
                 container.style.display = 'none';
                 return;
@@ -1251,17 +1333,28 @@
 
         // Image option selection
         document.querySelectorAll('.image-option').forEach(option => {
-            option.addEventListener('click', function() {
+            option.addEventListener('click', function(e) {
                 const input = this.querySelector('input');
-                input.checked = true;
+                if (input.disabled || this.classList.contains('disabled')) {
+                    e.preventDefault();
+                    return;
+                }
+                
+                // Toggle checkbox
+                input.checked = !input.checked;
+                
+                // Trigger change event to update max-3 logic
+                const event = new Event('change', { bubbles: true });
+                input.dispatchEvent(event);
                 
                 // Visual feedback
-                document.querySelectorAll('.image-option').forEach(opt => {
-                    opt.style.borderColor = '#e5e7eb';
-                    opt.style.background = '#f9fafb';
-                });
-                this.style.borderColor = '#25BAA8';
-                this.style.background = '#ecfdf5';
+                if (input.checked) {
+                    this.style.borderColor = '#25BAA8';
+                    this.style.background = '#ecfdf5';
+                } else {
+                    this.style.borderColor = '#e5e7eb';
+                    this.style.background = '#f9fafb';
+                }
             });
         });
 
