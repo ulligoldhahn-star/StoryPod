@@ -131,7 +131,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            opacity: 0.15;
+            opacity: 0.25;
             pointer-events: none;
             z-index: 0;
         }
@@ -151,6 +151,24 @@
 
         #page2::before {
             background-image: url('bilder/story134.png');
+            height: 50%;
+            bottom: 50%;
+        }
+
+        #page2::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('bilder/storypod_bild_mn.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 0;
         }
 
         #page3::before {
@@ -174,6 +192,19 @@
             color: #156082;
             margin-bottom: 12px;
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(243, 244, 246, 0.9);
+            padding: 20px 24px;
+            border-radius: 12px;
+            border-left: 4px solid #25BAA8;
+        }
+
+        .section-icon {
+            font-size: 1.3em;
+            min-width: 32px;
+            text-align: center;
         }
 
         .section-subtitle {
@@ -639,7 +670,7 @@
             .page::before {
                 background-size: cover;
                 background-position: center;
-                opacity: 0.12;
+                opacity: 0.20;
             }
 
             .intro-box {
@@ -695,7 +726,7 @@
 
         <!-- Page 1: Familie -->
         <div class="page" id="page1">
-            <h2 class="section-title">Teil 1: Erzähl uns kurz von deiner Familie</h2>
+            <h2 class="section-title"><span class="section-icon">👨‍👩‍👧‍👦</span>Teil 1: Erzähl uns kurz von deiner Familie</h2>
             <p class="section-subtitle">Das hilft uns, dein Feedback besser einzuordnen.</p>
 
             <div class="question-group">
@@ -770,7 +801,7 @@
 
         <!-- Page 2: Hardware Feedback -->
         <div class="page" id="page2">
-            <h2 class="section-title">Teil 2: Der Storypod in deinen Händen</h2>
+            <h2 class="section-title"><span class="section-icon">🎧</span>Teil 2: Der Storypod in deinen Händen</h2>
             <p class="section-subtitle">Super, der erste Teil ist geschafft! Jetzt geht es ans Eingemachte: Wie fühlt sich der Storypod an?</p>
 
             <div class="question-group">
@@ -949,7 +980,7 @@
 
         <!-- Page 3: App & Software -->
         <div class="page" id="page3">
-            <h2 class="section-title">Teil 3: Die App & die "inneren Werte"</h2>
+            <h2 class="section-title"><span class="section-icon">📱</span>Teil 3: Die App & die "inneren Werte"</h2>
             <p class="section-subtitle">Klasse, danke für das Hardware-Feedback! Lass uns nun einen Blick auf die Software und die App werfen.</p>
 
             <div class="question-group">
@@ -1059,7 +1090,7 @@
 
         <!-- Page 4: Pricing -->
         <div class="page" id="page4">
-            <h2 class="section-title">Teil 4: Das liebe Geld</h2>
+            <h2 class="section-title"><span class="section-icon">💶</span>Teil 4: Das liebe Geld</h2>
             <p class="section-subtitle">Letzte Runde! Deine ehrliche Einschätzung hilft uns, ein faires Angebot zu schaffen. Du bist fast am Ziel!</p>
 
             <div class="question-group">
@@ -1246,6 +1277,26 @@
                 if (appFeatures.length === 0) {
                     showModal('Bitte wähle mindestens eine App-Funktion aus.');
                     return;
+                }
+                
+                // Check if "Sonstiges" is selected in Hauptziele
+                const hauptzieleSonstiges = document.getElementById('hauptzieleSonstiges');
+                if (hauptzieleSonstiges && hauptzieleSonstiges.checked) {
+                    const hauptzieleText = document.getElementById('hauptzieleText');
+                    if (!hauptzieleText || !hauptzieleText.value.trim()) {
+                        showModal('Bitte gib dein eigenes Hauptziel bei Frage 7 ein.');
+                        return;
+                    }
+                }
+                
+                // Check if "Sonstiges" is selected in App-Funktionen
+                const appFunktionenSonstiges = document.getElementById('appFunktionenSonstiges');
+                if (appFunktionenSonstiges && appFunktionenSonstiges.checked) {
+                    const appFunktionenText = document.getElementById('appFunktionenText');
+                    if (!appFunktionenText || !appFunktionenText.value.trim()) {
+                        showModal('Bitte gib deine eigene Wunschfunktion bei Frage 8 ein.');
+                        return;
+                    }
                 }
             }
 
