@@ -128,10 +128,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-size: 600px;
+            background-size: cover;
             background-repeat: no-repeat;
-            background-position: bottom -50px right -50px;
-            opacity: 0.12;
+            background-position: center;
+            opacity: 0.08;
             pointer-events: none;
             z-index: 0;
         }
@@ -205,7 +205,7 @@
         textarea {
             width: 100%;
             padding: 16px 18px;
-            border: 2px solid #fbbf24;
+            border: 2px solid #6D7BA0;
             border-radius: 12px;
             font-size: 1em;
             font-family: inherit;
@@ -637,9 +637,9 @@
             }
 
             .page::before {
-                background-size: 350px;
-                background-position: bottom -30px right -30px;
-                opacity: 0.08;
+                background-size: cover;
+                background-position: center;
+                opacity: 0.06;
             }
 
             .intro-box {
@@ -797,7 +797,7 @@
 
             <div class="conditional-section" id="highRating">
                 <strong>Wow, das freut uns riesig!</strong>
-                <label class="question-label" style="margin-top: 16px;">Was genau findest du am Design besonders gelungen?</label>
+                <label class="question-label" style="margin-top: 16px;">Was genau findest du am Design besonders gelungen oder wo siehst Du noch Potenzial?</label>
                 <textarea id="highRatingText" name="Feedback zu hohem Design-Rating" placeholder="Dein Feedback..."></textarea>
             </div>
 
@@ -969,9 +969,13 @@
                         <input type="checkbox" name="Hauptziele" value="Spaß und Unterhaltung" class="max-3-checkbox" data-group="hauptziele">
                         <label>Mein Kind soll einfach nur Spaß und Unterhaltung haben</label>
                     </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="hauptzieleSonstiges" class="max-3-checkbox" data-group="hauptziele">
+                        <label for="hauptzieleSonstiges">Sonstiges</label>
+                    </div>
                 </div>
-                <div style="margin-top: 16px;">
-                    <input type="text" name="Hauptziele - Sonstiges" placeholder="Oder gib hier dein eigenes Ziel ein..." style="width: 100%;">
+                <div id="hauptzieleTextContainer" style="margin-top: 16px; display: none;">
+                    <input type="text" id="hauptzieleText" name="Hauptziele - Sonstiges" placeholder="Gib hier dein eigenes Ziel ein..." style="width: 100%;">
                 </div>
             </div>
 
@@ -1003,9 +1007,13 @@
                         <input type="checkbox" name="App-Funktionen" value="Mehrere Kinder" class="max-3-checkbox" data-group="appfunktionen">
                         <label>Mehrere Kinder verwalten: Eigene Profile für jedes Geschwisterkind</label>
                     </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="appFunktionenSonstiges" class="max-3-checkbox" data-group="appfunktionen">
+                        <label for="appFunktionenSonstiges">Sonstiges</label>
+                    </div>
                 </div>
-                <div style="margin-top: 16px;">
-                    <input type="text" name="App-Funktionen - Sonstiges" placeholder="Oder gib hier deine eigene Wunschfunktion ein..." style="width: 100%;">
+                <div id="appFunktionenTextContainer" style="margin-top: 16px; display: none;">
+                    <input type="text" id="appFunktionenText" name="App-Funktionen - Sonstiges" placeholder="Gib hier deine eigene Wunschfunktion ein..." style="width: 100%;">
                 </div>
             </div>
 
@@ -1058,7 +1066,7 @@
             </div>
 
             <div class="question-group">
-                <label class="question-label">12. Was wärst du bereit, für zusätzliche Inhalte (z.B. ein neues Themen-Set mit Figur) im Durchschnitt zu zahlen?</label>
+                <label class="question-label">12. Was wärst du bereit, für zusätzliche Inhalte (z.B. ein neues Themen-Set mit Figur) im Durchschnitt zu zahlen?<span class="required">*</span></label>
                 <div class="radio-group">
                     <div class="radio-option">
                         <input type="radio" id="price1" name="Preis für Zusatzinhalte" value="bis 9,99 €">
@@ -1077,12 +1085,9 @@
 
             <div class="question-group">
                 <label class="question-label">13. Stell dir vor, es gäbe ein "Storypod Club-Abo" für 9,99 €/Monat, das dir jeden Monat neue, exklusive Inhalte freischaltet und Rabatte auf Zubehör gibt. Wie klingt das für dich?<span class="required">*</span></label>
-                <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 20px;">
-                    <div style="display: flex; justify-content: space-between; width: 100%; max-width: 400px; color: #6b7280; font-size: 0.9em;">
-                        <span>Absolut uninteressant</span>
-                        <span>Klingt super!</span>
-                    </div>
-                    <div class="star-rating">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    <span style="color: #6b7280; font-size: 0.9em; white-space: nowrap;">Absolut uninteressant</span>
+                    <div class="star-rating" style="margin: 0 20px;">
                         <input type="radio" name="Abo-Interesse" id="sub5" value="5" required>
                         <label for="sub5">★</label>
                         <input type="radio" name="Abo-Interesse" id="sub4" value="4">
@@ -1094,6 +1099,7 @@
                         <input type="radio" name="Abo-Interesse" id="sub1" value="1">
                         <label for="sub1">★</label>
                     </div>
+                    <span style="color: #6b7280; font-size: 0.9em; white-space: nowrap;">Klingt super!</span>
                 </div>
             </div>
 
@@ -1382,6 +1388,72 @@
 
         // Max 3 Checkbox Limit Logic
         document.addEventListener('DOMContentLoaded', function() {
+            // Sonstiges checkbox handlers for Hauptziele
+            const hauptzieleSonstiges = document.getElementById('hauptzieleSonstiges');
+            const hauptzieleTextContainer = document.getElementById('hauptzieleTextContainer');
+            const hauptzieleText = document.getElementById('hauptzieleText');
+            
+            if (hauptzieleSonstiges) {
+                hauptzieleSonstiges.addEventListener('change', function() {
+                    if (this.checked) {
+                        hauptzieleTextContainer.style.display = 'block';
+                        // Set the checkbox value to the text input value if it exists
+                        if (hauptzieleText.value.trim()) {
+                            this.value = hauptzieleText.value;
+                            this.setAttribute('name', 'Hauptziele');
+                        } else {
+                            // Default value until user types something
+                            this.value = 'Sonstiges';
+                            this.setAttribute('name', 'Hauptziele');
+                        }
+                    } else {
+                        hauptzieleTextContainer.style.display = 'none';
+                        hauptzieleText.value = '';
+                        this.removeAttribute('name');
+                    }
+                });
+                
+                // Update checkbox value when user types in text field
+                hauptzieleText.addEventListener('input', function() {
+                    if (hauptzieleSonstiges.checked && this.value.trim()) {
+                        hauptzieleSonstiges.value = this.value;
+                    }
+                });
+            }
+            
+            // Sonstiges checkbox handlers for App-Funktionen
+            const appFunktionenSonstiges = document.getElementById('appFunktionenSonstiges');
+            const appFunktionenTextContainer = document.getElementById('appFunktionenTextContainer');
+            const appFunktionenText = document.getElementById('appFunktionenText');
+            
+            if (appFunktionenSonstiges) {
+                appFunktionenSonstiges.addEventListener('change', function() {
+                    if (this.checked) {
+                        appFunktionenTextContainer.style.display = 'block';
+                        // Set the checkbox value to the text input value if it exists
+                        if (appFunktionenText.value.trim()) {
+                            this.value = appFunktionenText.value;
+                            this.setAttribute('name', 'App-Funktionen');
+                        } else {
+                            // Default value until user types something
+                            this.value = 'Sonstiges';
+                            this.setAttribute('name', 'App-Funktionen');
+                        }
+                    } else {
+                        appFunktionenTextContainer.style.display = 'none';
+                        appFunktionenText.value = '';
+                        this.removeAttribute('name');
+                    }
+                });
+                
+                // Update checkbox value when user types in text field
+                appFunktionenText.addEventListener('input', function() {
+                    if (appFunktionenSonstiges.checked && this.value.trim()) {
+                        appFunktionenSonstiges.value = this.value;
+                    }
+                });
+            }
+
             document.querySelectorAll('.max-3-checkbox').forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
                     const group = this.getAttribute('data-group');
