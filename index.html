@@ -131,7 +131,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            opacity: 0.25;
+            opacity: 0.18;
             pointer-events: none;
             z-index: 0;
         }
@@ -153,6 +153,7 @@
             background-image: url('bilder/story134.png');
             height: 50%;
             bottom: 50%;
+            opacity: 0.18;
         }
 
         #page2::after {
@@ -166,7 +167,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            opacity: 0.25;
+            opacity: 0.18;
             pointer-events: none;
             z-index: 0;
         }
@@ -190,7 +191,7 @@
         .section-title {
             font-size: 1.8em;
             color: #156082;
-            margin-bottom: 12px;
+            margin-bottom: 30px;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -199,6 +200,8 @@
             padding: 20px 24px;
             border-radius: 12px;
             border-left: 4px solid #25BAA8;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .section-icon {
@@ -208,9 +211,10 @@
         }
 
         .section-subtitle {
-            font-size: 1.1em;
+            font-size: 0.6em;
             color: #6b7280;
-            margin-bottom: 30px;
+            margin-top: 8px;
+            font-weight: 400;
         }
 
         .question-group {
@@ -670,7 +674,7 @@
             .page::before {
                 background-size: cover;
                 background-position: center;
-                opacity: 0.20;
+                opacity: 0.15;
             }
 
             .intro-box {
@@ -726,8 +730,9 @@
 
         <!-- Page 1: Familie -->
         <div class="page" id="page1">
-            <h2 class="section-title">Teil 1: Erzähl uns kurz von deiner Familie</h2>
-            <p class="section-subtitle">Das hilft uns, dein Feedback besser einzuordnen.</p>
+            <h2 class="section-title">Teil 1: Erzähl uns kurz von deiner Familie
+                <span class="section-subtitle">Das hilft uns, dein Feedback besser einzuordnen.</span>
+            </h2>
 
             <div class="question-group">
                 <label class="question-label">1. Wer gehört zu deinem Storypod-Test-Team?<span class="required">*</span></label>
@@ -849,8 +854,9 @@
 
         <!-- Page 2: Hardware Feedback -->
         <div class="page" id="page2">
-            <h2 class="section-title">Teil 2: Der Storypod in deinen Händen</h2>
-            <p class="section-subtitle">Super, der erste Teil ist geschafft! Jetzt geht es ans Eingemachte: Wie fühlt sich der Storypod an?</p>
+            <h2 class="section-title">Teil 2: Der Storypod in deinen Händen
+                <span class="section-subtitle">Super, der erste Teil ist geschafft! Jetzt geht es ans Eingemachte: Wie fühlt sich der Storypod an?</span>
+            </h2>
 
             <div class="question-group">
                 <label class="question-label">3. Du hattest den Storypod nun in den Händen. Wie bewertest du das Design und die Haptik?<span class="required">*</span></label>
@@ -1028,8 +1034,9 @@
 
         <!-- Page 3: App & Software -->
         <div class="page" id="page3">
-            <h2 class="section-title">Teil 3: Die App & die "inneren Werte"</h2>
-            <p class="section-subtitle">Klasse, danke für das Hardware-Feedback! Lass uns nun einen Blick auf die Software und die App werfen.</p>
+            <h2 class="section-title">Teil 3: Die App & die "inneren Werte"
+                <span class="section-subtitle">Klasse, danke für das Hardware-Feedback! Lass uns nun einen Blick auf die Software und die App werfen.</span>
+            </h2>
 
             <div class="question-group">
                 <label class="question-label">7. Was ist dein Hauptziel bei der Nutzung von Storypod? Ordne die folgenden Ziele nach ihrer Wichtigkeit für dich.<span class="required">*</span></label>
@@ -1138,8 +1145,9 @@
 
         <!-- Page 4: Pricing -->
         <div class="page" id="page4">
-            <h2 class="section-title">Teil 4: Das liebe Geld</h2>
-            <p class="section-subtitle">Letzte Runde! Deine ehrliche Einschätzung hilft uns, ein faires Angebot zu schaffen. Du bist fast am Ziel!</p>
+            <h2 class="section-title">Teil 4: Das liebe Geld
+                <span class="section-subtitle">Letzte Runde! Deine ehrliche Einschätzung hilft uns, ein faires Angebot zu schaffen. Du bist fast am Ziel!</span>
+            </h2>
 
             <div class="question-group">
                 <label class="question-label">11. Du hast den Storypod nun erlebt. Welchen Preis empfindest du für das Starterset (Player + eine erste Figur/Karte) als fair?</label>
