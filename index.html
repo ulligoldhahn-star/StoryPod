@@ -12,19 +12,19 @@
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #156082 0%, #6D7BA0 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f7;
             min-height: 100vh;
             padding: 20px;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 980px;
             margin: 0 auto;
             background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.15);
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
             overflow: hidden;
         }
 
@@ -75,12 +75,16 @@
             font-size: 1.1em;
         }
 
+        .progress-container {
+            margin: 0 40px 30px;
+        }
+
         .progress-bar {
             background: #e5e7eb;
-            height: 8px;
-            border-radius: 4px;
-            margin: 0 40px 30px;
+            height: 6px;
+            border-radius: 3px;
             overflow: hidden;
+            margin-bottom: 8px;
         }
 
         .progress-fill {
@@ -88,6 +92,13 @@
             height: 100%;
             width: 0%;
             transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            text-align: right;
+            font-size: 0.85em;
+            color: #6b7280;
+            font-weight: 500;
         }
 
         .page {
@@ -169,20 +180,19 @@
         .radio-option {
             display: flex;
             align-items: center;
-            padding: 16px 18px;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
+            padding: 14px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: #f9fafb;
+            transition: all 0.2s ease;
+            background: #ffffff;
         }
 
         .checkbox-option:hover,
         .radio-option:hover {
             border-color: #25BAA8;
-            background: #ecfdf5;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 186, 168, 0.15);
+            background: #f9fafb;
+            box-shadow: 0 2px 8px rgba(37, 186, 168, 0.1);
         }
 
         .checkbox-option input,
@@ -263,6 +273,7 @@
             background: #e5e7eb;
             outline: none;
             -webkit-appearance: none;
+            appearance: none;
         }
 
         .slider::-webkit-slider-thumb {
@@ -412,6 +423,70 @@
             display: block;
         }
 
+        .draggable-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .draggable-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            cursor: move;
+            transition: all 0.2s ease;
+            background: #ffffff;
+            user-select: none;
+        }
+
+        .draggable-item.dragging {
+            opacity: 0.5;
+        }
+
+        .draggable-item.selected {
+            border-color: #25BAA8;
+            background: #ecfdf5;
+        }
+
+        .drag-handle {
+            margin-right: 12px;
+            color: #9ca3af;
+            font-size: 1.2em;
+        }
+
+        .rank-badge {
+            background: #25BAA8;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 12px;
+        }
+
+        .note-text {
+            font-size: 0.9em;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        .required-note {
+            background: #fef3c7;
+            border-left: 3px solid #f59e0b;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #92400e;
+        }
+
         @media (max-width: 768px) {
             .header {
                 padding: 40px 25px;
@@ -447,8 +522,11 @@
             <p>Gestalte mit uns die Zukunft des Lernens!</p>
         </div>
 
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0/100%</div>
         </div>
 
         <!-- Page 0: Begrüßung -->
@@ -503,7 +581,7 @@
             </div>
 
             <div class="question-group">
-                <label class="question-label">2. Welche Audio-Systeme für Kinder kennt oder nutzt ihr bereits?</label>
+                <label class="question-label">2. Welche Audio-Systeme für Kinder kennt oder nutzt ihr bereits?<span class="required">*</span></label>
                 <table class="matrix-table">
                     <thead>
                         <tr>
@@ -537,6 +615,12 @@
                             <td><input type="checkbox" name="Keines - Kenne ich" value="Ja"></td>
                             <td><input type="checkbox" name="Keines - Haben wir" value="Ja"></td>
                             <td><input type="checkbox" name="Keines - Nutzen aktiv" value="Ja"></td>
+                        </tr>
+                        <tr>
+                            <td>Nicht bekannt</td>
+                            <td><input type="checkbox" id="nichtBekannt" name="Nicht bekannt" value="Ja"></td>
+                            <td><input type="checkbox" disabled></td>
+                            <td><input type="checkbox" disabled></td>
                         </tr>
                     </tbody>
                 </table>
@@ -623,69 +707,81 @@
                     </div>
                     <div class="slider-value" id="value4">3/5</div>
                 </div>
-            </div>
 
-            <div class="question-group">
-                <label class="question-label">5. Die Bedienung durch dein Kind: Wie intuitiv waren die Knöpfe?<span class="required">*</span></label>
-                <div class="radio-group">
-                    <div class="radio-option">
-                        <input type="radio" id="easy" name="Bedienungsfreundlichkeit" value="Super einfach" required>
-                        <label for="easy">Super einfach, mein Kind hat es sofort verstanden.</label>
+                <div style="margin-bottom: 30px;">
+                    <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Design im Allgemeinen</label>
+                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Design" oninput="updateSliderValue(this, 'value5')">
+                    <div class="slider-labels">
+                        <span>Unwichtig</span>
+                        <span>Absolut entscheidend</span>
                     </div>
-                    <div class="radio-option">
-                        <input type="radio" id="okay" name="Bedienungsfreundlichkeit" value="Okay, brauchte Übung">
-                        <label for="okay">Okay, aber es brauchte etwas Übung.</label>
+                    <div class="slider-value" id="value5">3/5</div>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Haptik im Allgemeinen</label>
+                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Haptik" oninput="updateSliderValue(this, 'value6')">
+                    <div class="slider-labels">
+                        <span>Unwichtig</span>
+                        <span>Absolut entscheidend</span>
                     </div>
-                    <div class="radio-option">
-                        <input type="radio" id="difficult" name="Bedienungsfreundlichkeit" value="Schwierig">
-                        <label for="difficult">Eher schwierig, die Funktionen waren nicht sofort klar.</label>
-                    </div>
-                    <div class="radio-option">
-                        <input type="radio" id="notused" name="Bedienungsfreundlichkeit" value="Nicht selbst bedient">
-                        <label for="notused">Mein Kind hat es nicht selbst bedient.</label>
-                    </div>
+                    <div class="slider-value" id="value6">3/5</div>
                 </div>
             </div>
 
             <div class="question-group">
-                <label class="question-label">6. Stell dir vor, du könntest den Storypod mit einer Eigenschaft tunen. Welche wäre es?</label>
-                <div class="image-choice">
+                <label class="question-label">5. Die Bedienung durch dein Kind: Wie intuitiv waren die Knöpfe?<span class="required">*</span></label>
+                <p class="note-text">Falls du mehrere Kinder mit unterschiedlichem Alter hast, beantworte diese Frage bitte für jede relevante Altersgruppe separat im Textfeld oder wähle die durchschnittliche Erfahrung.</p>
+                
+                <div id="easeContainer"></div>
+                
+                <div style="margin-top: 20px;">
+                    <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Zusätzliche Anmerkungen zu verschiedenen Altersgruppen (optional):</label>
+                    <textarea name="Bedienung - Details nach Altersgruppe" placeholder="z.B. 'Kind 3 Jahre: sehr einfach, Kind 6 Jahre: brauchte Übung'" style="min-height: 80px;"></textarea>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label class="question-label">6. Stell dir vor, du könntest den Storypod mit einer Eigenschaft tunen. Welche wären deine Top 3?</label>
+                <p class="note-text">Wähle bis zu 3 Eigenschaften aus und ziehe sie in die gewünschte Reihenfolge (wichtigste oben).</p>
+                <div class="image-choice" id="tuningOptions">
                     <label class="image-option">
-                        <input type="radio" name="Tuning-Wunsch" value="Mehr Farben/Designs">
+                        <input type="checkbox" name="Tuning-Wunsch" value="Mehr Farben/Designs">
                         <div>
                             <div class="emoji">🎨</div>
                             <div>Mehr Farben/Designs für die Hüllen</div>
                         </div>
                     </label>
                     <label class="image-option">
-                        <input type="radio" name="Tuning-Wunsch" value="Noch robuster">
+                        <input type="checkbox" name="Tuning-Wunsch" value="Noch robuster">
                         <div>
                             <div class="emoji">🧱</div>
                             <div>Noch robuster machen</div>
                         </div>
                     </label>
                     <label class="image-option">
-                        <input type="radio" name="Tuning-Wunsch" value="Besserer Lautsprecher">
+                        <input type="checkbox" name="Tuning-Wunsch" value="Besserer Lautsprecher">
                         <div>
                             <div class="emoji">🔊</div>
                             <div>Bessere Qualität des Lautsprechers</div>
                         </div>
                     </label>
                     <label class="image-option">
-                        <input type="radio" name="Tuning-Wunsch" value="Längere Akkulaufzeit">
+                        <input type="checkbox" name="Tuning-Wunsch" value="Längere Akkulaufzeit">
                         <div>
                             <div class="emoji">🔋</div>
                             <div>Noch längere Akkulaufzeit</div>
                         </div>
                     </label>
                     <label class="image-option">
-                        <input type="radio" name="Tuning-Wunsch" value="Besseres Mikrofon">
+                        <input type="checkbox" name="Tuning-Wunsch" value="Besseres Mikrofon">
                         <div>
                             <div class="emoji">🎤</div>
                             <div>Hochwertigeres Mikrofon</div>
                         </div>
                     </label>
                 </div>
+                <div id="selectedTuning" style="display: none; margin-top: 20px;"></div>
             </div>
 
             <div class="nav-buttons">
@@ -762,7 +858,7 @@
                 <div class="radio-group">
                     <div class="radio-option">
                         <input type="radio" id="walkie1" name="Walkie-Talkie" value="Genial!">
-                        <label for="walkie1">Genial! Würde ich sofort nutzen, um mein Kind zu rufen.</label>
+                        <label for="walkie1">Genial! Würde ich sofort nutzen, um mit dem Kind zu kommunizieren (z.B. rufen, beruhigen, ...).</label>
                     </div>
                     <div class="radio-option">
                         <input type="radio" id="walkie2" name="Walkie-Talkie" value="Nette Spielerei">
@@ -824,23 +920,29 @@
             </div>
 
             <div class="question-group">
-                <label class="question-label">13. Stell dir vor, es gäbe ein "Storypod Club-Abo" für 9,99 €/Monat, das dir jeden Monat neue, exklusive Inhalte freischaltet und Rabatte auf Zubehör gibt. Wie klingt das für dich?</label>
-                <div class="star-rating">
-                    <input type="radio" name="Abo-Interesse" id="sub5" value="5 Sterne">
-                    <label for="sub5">★</label>
-                    <input type="radio" name="Abo-Interesse" id="sub4" value="4 Sterne">
-                    <label for="sub4">★</label>
-                    <input type="radio" name="Abo-Interesse" id="sub3" value="3 Sterne">
-                    <label for="sub3">★</label>
-                    <input type="radio" name="Abo-Interesse" id="sub2" value="2 Sterne">
-                    <label for="sub2">★</label>
-                    <input type="radio" name="Abo-Interesse" id="sub1" value="1 Stern">
-                    <label for="sub1">★</label>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-top: 12px; color: #6b7280; font-size: 0.9em;">
+                <label class="question-label">13. Stell dir vor, es gäbe ein "Storypod Club-Abo" für 9,99 €/Monat, das dir jeden Monat neue, exklusive Inhalte freischaltet und Rabatte auf Zubehör gibt. Wie klingt das für dich?<span class="required">*</span></label>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; color: #6b7280; font-size: 0.9em;">
                     <span>Absolut uninteressant</span>
                     <span>Klingt super!</span>
                 </div>
+                <div class="star-rating">
+                    <input type="radio" name="Abo-Interesse" id="sub5" value="5" required>
+                    <label for="sub5">★</label>
+                    <input type="radio" name="Abo-Interesse" id="sub4" value="4">
+                    <label for="sub4">★</label>
+                    <input type="radio" name="Abo-Interesse" id="sub3" value="3">
+                    <label for="sub3">★</label>
+                    <input type="radio" name="Abo-Interesse" id="sub2" value="2">
+                    <label for="sub2">★</label>
+                    <input type="radio" name="Abo-Interesse" id="sub1" value="1">
+                    <label for="sub1">★</label>
+                </div>
+            </div>
+
+            <div class="conditional-section" id="lowAboRating">
+                <strong>Schade, dass dich das Abo-Modell nicht überzeugt.</strong>
+                <label class="question-label" style="margin-top: 16px;">Was müsste ein Abo-Modell bieten, damit es für dich interessant wäre?<span class="required">*</span></label>
+                <textarea id="lowAboText" name="Feedback zu Abo" placeholder="Dein Feedback..." required></textarea>
             </div>
 
             <div class="nav-buttons">
@@ -867,6 +969,10 @@
                 </div>
 
                 <button class="btn btn-primary" onclick="submitSurvey()" style="max-width: 400px; margin: 0 auto;">Feedback absenden & Rabatt sichern! 🎁</button>
+                
+                <div class="required-note">
+                    ** Gültig bei Bestellwert von mindestens 99€ direkt auf Storypod.com
+                </div>
             </div>
         </div>
 
@@ -887,8 +993,9 @@
         const totalPages = 6;
 
         function updateProgress() {
-            const progress = (currentPage / totalPages) * 100;
+            const progress = Math.round((currentPage / totalPages) * 100);
             document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = progress + '/100%';
         }
 
         function nextPage() {
@@ -896,7 +1003,14 @@
             if (currentPage === 1) {
                 const familyChecked = document.querySelectorAll('input[name="Familie"]:checked');
                 if (familyChecked.length === 0) {
-                    alert('Bitte wähle mindestens eine Option aus.');
+                    alert('Bitte wähle mindestens eine Option bei Frage 1 aus.');
+                    return;
+                }
+                
+                // Check if at least one checkbox in audio systems matrix is checked
+                const audioChecked = document.querySelectorAll('.matrix-table input[type="checkbox"]:checked');
+                if (audioChecked.length === 0) {
+                    alert('Bitte wähle mindestens eine Option bei Frage 2 (Audio-Systeme) aus.');
                     return;
                 }
             }
@@ -921,9 +1035,33 @@
                     alert('Bitte wähle mindestens ein Hauptziel aus.');
                     return;
                 }
+                if (goals.length > 3) {
+                    alert('Bitte wähle maximal 3 Hauptziele aus.');
+                    return;
+                }
                 if (appFeatures.length === 0) {
                     alert('Bitte wähle mindestens eine App-Funktion aus.');
                     return;
+                }
+                if (appFeatures.length > 3) {
+                    alert('Bitte wähle maximal 3 App-Funktionen aus.');
+                    return;
+                }
+            }
+
+            if (currentPage === 4) {
+                const aboRating = document.querySelector('input[name="Abo-Interesse"]:checked');
+                if (!aboRating) {
+                    alert('Bitte bewerte das Abo-Modell mit Sternen.');
+                    return;
+                }
+                const rating = parseInt(aboRating.value);
+                if (rating <= 3) {
+                    const lowAboText = document.getElementById('lowAboText');
+                    if (!lowAboText.value.trim()) {
+                        alert('Bitte teile uns mit, was ein Abo-Modell für dich interessant machen würde.');
+                        return;
+                    }
                 }
             }
 
@@ -969,6 +1107,147 @@
                 }
             });
         });
+
+        // Abo rating conditional logic
+        document.querySelectorAll('input[name="Abo-Interesse"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const rating = parseInt(this.value);
+                const lowAboRating = document.getElementById('lowAboRating');
+                const lowAboText = document.getElementById('lowAboText');
+                
+                if (rating <= 3) {
+                    lowAboRating.classList.add('show');
+                    lowAboText.required = true;
+                } else {
+                    lowAboRating.classList.remove('show');
+                    lowAboText.required = false;
+                }
+            });
+        });
+
+        // Create ease of use options based on selected family members
+        function createEaseOptions() {
+            const familyChecked = document.querySelectorAll('input[name="Familie"]:checked');
+            const container = document.getElementById('easeContainer');
+            
+            if (familyChecked.length === 0) {
+                container.innerHTML = '<div class="radio-group"><div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Allgemein - Super einfach" required><label>Super einfach, sofort verstanden</label></div><div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Allgemein - Okay"><label>Okay, brauchte etwas Übung</label></div><div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Allgemein - Schwierig"><label>Eher schwierig</label></div><div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Nicht selbst bedient"><label>Nicht selbst bedient</label></div></div>';
+            } else {
+                let html = '<div class="radio-group">';
+                html += '<div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Allgemein - Super einfach" required><label>Super einfach für alle Altersgruppen</label></div>';
+                html += '<div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Allgemein - Okay"><label>Okay für alle Altersgruppen</label></div>';
+                html += '<div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Unterschiedlich"><label>Unterschiedlich je nach Altersgruppe (siehe Textfeld unten)</label></div>';
+                html += '<div class="radio-option"><input type="radio" name="Bedienungsfreundlichkeit" value="Nicht selbst bedient"><label>Nicht selbst bedient</label></div>';
+                html += '</div>';
+                container.innerHTML = html;
+            }
+        }
+
+        // Initialize ease options when page 2 becomes active
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.target.id === 'page2' && mutation.target.classList.contains('active')) {
+                    createEaseOptions();
+                }
+            });
+        });
+
+        const page2 = document.getElementById('page2');
+        if (page2) {
+            observer.observe(page2, { attributes: true, attributeFilter: ['class'] });
+        }
+
+        // Tuning feature selection with ranking
+        let selectedTuning = [];
+        
+        function initTuningCheckboxes() {
+            document.querySelectorAll('#tuningOptions input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        if (selectedTuning.length >= 3) {
+                            this.checked = false;
+                            alert('Du kannst maximal 3 Eigenschaften auswählen.');
+                            return;
+                        }
+                        selectedTuning.push(this.value);
+                        this.closest('.image-option').classList.add('selected');
+                    } else {
+                        selectedTuning = selectedTuning.filter(item => item !== this.value);
+                        this.closest('.image-option').classList.remove('selected');
+                    }
+                    updateTuningRanking();
+                });
+            });
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initTuningCheckboxes);
+
+        function updateTuningRanking() {
+            const container = document.getElementById('selectedTuning');
+            if (selectedTuning.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+            
+            container.style.display = 'block';
+            let html = '<p style="font-weight: 600; color: #156082; margin-bottom: 12px;">Deine Auswahl (ziehen zum Sortieren):</p>';
+            
+            selectedTuning.forEach((item, index) => {
+                html += `<div class="draggable-item" draggable="true" data-value="${item}"><span class="rank-badge">${index + 1}</span><span class="drag-handle">☰</span> ${item}</div>`;
+            });
+            
+            container.innerHTML = html;
+            
+            // Add drag and drop functionality
+            const items = container.querySelectorAll('.draggable-item');
+            items.forEach(item => {
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragover', handleDragOver);
+                item.addEventListener('drop', handleDrop);
+                item.addEventListener('dragend', handleDragEnd);
+            });
+        }
+
+        let draggedItem = null;
+
+        function handleDragStart(e) {
+            draggedItem = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            
+            if (draggedItem !== this) {
+                const allItems = [...document.querySelectorAll('#selectedTuning .draggable-item')];
+                const draggedIndex = allItems.indexOf(draggedItem);
+                const targetIndex = allItems.indexOf(this);
+                
+                const draggedValue = selectedTuning[draggedIndex];
+                selectedTuning.splice(draggedIndex, 1);
+                selectedTuning.splice(targetIndex, 0, draggedValue);
+                
+                updateTuningRanking();
+            }
+            
+            return false;
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+        }
 
         // Image option selection
         document.querySelectorAll('.image-option').forEach(option => {
