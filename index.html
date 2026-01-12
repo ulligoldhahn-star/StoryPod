@@ -789,9 +789,16 @@
                 </div>
             </div>
 
-            <div style="margin-top: 30px;">
-                <label class="question-label">Was genau gefällt dir am Design oder was würdest du verbessern?</label>
-                <textarea name="Feedback zu Design" placeholder="Dein Feedback..."></textarea>
+            <div class="conditional-section" id="lowRating">
+                <strong>Oh, das bedauern wir. Hilf uns, es besser zu machen!</strong>
+                <label class="question-label" style="margin-top: 16px;">Was genau hat dir nicht gefallen oder was fehlt dir?<span class="required">*</span></label>
+                <textarea id="lowRatingText" name="Feedback zu niedrigem Design-Rating" placeholder="Dein Feedback..."></textarea>
+            </div>
+
+            <div class="conditional-section" id="highRating">
+                <strong>Wow, das freut uns riesig!</strong>
+                <label class="question-label" style="margin-top: 16px;">Was genau findest du am Design besonders gelungen?</label>
+                <textarea id="highRatingText" name="Feedback zu hohem Design-Rating" placeholder="Dein Feedback..."></textarea>
             </div>
 
             <div class="question-group">
@@ -963,6 +970,9 @@
                         <label>Mein Kind soll einfach nur Spaß und Unterhaltung haben</label>
                     </div>
                 </div>
+                <div style="margin-top: 16px;">
+                    <input type="text" name="Hauptziele - Sonstiges" placeholder="Oder gib hier dein eigenes Ziel ein..." style="width: 100%;">
+                </div>
             </div>
 
             <div class="question-group">
@@ -993,6 +1003,9 @@
                         <input type="checkbox" name="App-Funktionen" value="Mehrere Kinder" class="max-3-checkbox" data-group="appfunktionen">
                         <label>Mehrere Kinder verwalten: Eigene Profile für jedes Geschwisterkind</label>
                     </div>
+                </div>
+                <div style="margin-top: 16px;">
+                    <input type="text" name="App-Funktionen - Sonstiges" placeholder="Oder gib hier deine eigene Wunschfunktion ein..." style="width: 100%;">
                 </div>
             </div>
 
@@ -1241,6 +1254,26 @@
         function updatePriceValue(slider) {
             document.getElementById('priceValue').textContent = '€' + slider.value;
         }
+
+        // Design rating conditional logic
+        document.querySelectorAll('input[name="Design Rating"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const rating = parseInt(this.value);
+                const lowRating = document.getElementById('lowRating');
+                const highRating = document.getElementById('highRating');
+                
+                if (rating <= 3) {
+                    lowRating.classList.add('show');
+                    highRating.classList.remove('show');
+                } else if (rating === 4) {
+                    highRating.classList.add('show');
+                    lowRating.classList.remove('show');
+                } else {
+                    lowRating.classList.remove('show');
+                    highRating.classList.remove('show');
+                }
+            });
+        });
 
         // Abo rating conditional logic
         document.querySelectorAll('input[name="Abo-Interesse"]').forEach(radio => {
