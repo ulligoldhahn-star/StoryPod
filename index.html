@@ -484,8 +484,8 @@
 
         .conditional-section {
             display: none;
-            background: #fef3c7;
-            border-left: 4px solid #fbbf24;
+            background: #f3f4f6;
+            border-left: 4px solid #6D7BA0;
             padding: 20px;
             margin: 20px 0;
             border-radius: 8px;
@@ -930,6 +930,13 @@
                             <div>Hochwertigeres Mikrofon</div>
                         </div>
                     </label>
+                    <label class="image-option">
+                        <input type="checkbox" id="tuningSonstiges" class="max-3-checkbox" data-group="tuning" value="Sonstiges">
+                        <div>
+                            <div class="emoji">✨</div>
+                            <div>Sonstiges</div>
+                        </div>
+                    </label>
                 </div>
                 <div id="selectedTuning" style="display: none; margin-top: 20px;"></div>
             </div>
@@ -1057,12 +1064,12 @@
 
             <div class="question-group">
                 <label class="question-label">11. Du hast den Storypod nun erlebt. Welchen Preis empfindest du für das Starterset (Player + eine erste Figur/Karte) als fair?</label>
-                <input type="range" class="slider" min="69" max="139" value="104" name="Fairer Preis Starterset" oninput="updatePriceValue(this)">
+                <input type="range" class="slider" min="69" max="139" value="69" name="Fairer Preis Starterset" oninput="updatePriceValue(this)" id="priceSlider">
                 <div class="slider-labels">
                     <span>€69</span>
                     <span>€139</span>
                 </div>
-                <div class="slider-value" id="priceValue">€104</div>
+                <div class="slider-value" id="priceValue">--€</div>
             </div>
 
             <div class="question-group">
@@ -1107,6 +1114,12 @@
                 <strong>Schade, dass dich das Abo-Modell nicht überzeugt.</strong>
                 <label class="question-label" style="margin-top: 16px;">Was müsste ein Abo-Modell bieten, damit es für dich interessant wäre?<span class="required">*</span></label>
                 <textarea id="lowAboText" name="Feedback zu Abo" placeholder="Dein Feedback..." required></textarea>
+            </div>
+
+            <div class="conditional-section" id="mediumAboRating">
+                <strong>Schön, dass dich das Abo-Modell interessiert!</strong>
+                <label class="question-label" style="margin-top: 16px;">Was müsste das Abo-Modell bieten, um dich vollends zu überzeugen?</label>
+                <textarea id="mediumAboText" name="Feedback zu Abo - 4 Sterne" placeholder="Dein Feedback..."></textarea>
             </div>
 
             <div class="nav-buttons">
@@ -1162,7 +1175,7 @@
 
     <script>
         let currentPage = 0;
-        const totalPages = 7;
+        const totalPages = 6;
 
         function updateProgress() {
             const progress = Math.round((currentPage / totalPages) * 100);
@@ -1188,11 +1201,15 @@
                     return;
                 }
                 
-                // Check if at least one checkbox in audio systems matrix is checked
-                const audioChecked = document.querySelectorAll('input[name="Audio-Systeme"]:checked');
-                if (audioChecked.length === 0) {
-                    showModal('Bitte wähle mindestens eine Option bei Frage 2 (Audio-Systeme) aus.');
-                    return;
+                // Check if each row in audio systems matrix has at least one checkbox checked
+                const audioSystemRows = ['Toniebox', 'Tigerbox', 'Yoto'];
+                for (let system of audioSystemRows) {
+                    const rowChecked = Array.from(document.querySelectorAll('input[name="Audio-Systeme"]:checked'))
+                        .some(checkbox => checkbox.value.includes(system));
+                    if (!rowChecked) {
+                        showModal(`Bitte wähle mindestens eine Option für ${system} bei Frage 2 aus.`);
+                        return;
+                    }
                 }
             }
 
@@ -1258,7 +1275,9 @@
         }
 
         function updatePriceValue(slider) {
-            document.getElementById('priceValue').textContent = '€' + slider.value;
+            const priceDisplay = document.getElementById('priceValue');
+            priceDisplay.textContent = '€' + slider.value;
+            priceDisplay.style.color = '#25BAA8'; // Highlight that value has been set
         }
 
         // Design rating conditional logic
@@ -1286,13 +1305,20 @@
             radio.addEventListener('change', function() {
                 const rating = parseInt(this.value);
                 const lowAboRating = document.getElementById('lowAboRating');
+                const mediumAboRating = document.getElementById('mediumAboRating');
                 const lowAboText = document.getElementById('lowAboText');
                 
                 if (rating <= 3) {
                     lowAboRating.classList.add('show');
+                    mediumAboRating.classList.remove('show');
                     lowAboText.required = true;
+                } else if (rating === 4) {
+                    mediumAboRating.classList.add('show');
+                    lowAboRating.classList.remove('show');
+                    lowAboText.required = false;
                 } else {
                     lowAboRating.classList.remove('show');
+                    mediumAboRating.classList.remove('show');
                     lowAboText.required = false;
                 }
             });
@@ -1515,10 +1541,37 @@
             let html = '<p style="font-weight: 600; color: #156082; margin-bottom: 12px;">Deine Auswahl (ziehen zum Sortieren):</p>';
             
             selectedTuning.forEach((item, index) => {
-                html += `<div class="draggable-item" draggable="true" data-value="${item}"><span class="rank-badge">${index + 1}</span><span class="drag-handle">☰</span> ${item}</div>`;
+                if (item === 'Sonstiges' || item.startsWith('Sonstiges: ')) {
+                    const currentText = item.startsWith('Sonstiges: ') ? item.substring(11) : '';
+                    html += `<div class="draggable-item" draggable="true" data-value="${item}"><span class="rank-badge">${index + 1}</span><span class="drag-handle">☰</span> Sonstiges: <input type="text" id="tuningSonstigesText" placeholder="Deine Idee..." value="${currentText}" style="border: 1px solid #d1d5db; border-radius: 6px; padding: 4px 8px; margin-left: 8px; width: 200px;" onclick="event.stopPropagation();"></div>`;
+                } else {
+                    html += `<div class="draggable-item" draggable="true" data-value="${item}"><span class="rank-badge">${index + 1}</span><span class="drag-handle">☰</span> ${item}</div>`;
+                }
             });
             
             container.innerHTML = html;
+            
+            // Add input handler for Sonstiges text field
+            const sonstigesInput = document.getElementById('tuningSonstigesText');
+            if (sonstigesInput) {
+                sonstigesInput.addEventListener('input', function() {
+                    const tuningSonstigesCheckbox = document.getElementById('tuningSonstiges');
+                    if (tuningSonstigesCheckbox) {
+                        if (this.value.trim()) {
+                            tuningSonstigesCheckbox.value = 'Sonstiges: ' + this.value;
+                            tuningSonstigesCheckbox.setAttribute('name', 'Tuning-Wunsch');
+                        } else {
+                            tuningSonstigesCheckbox.value = 'Sonstiges';
+                            tuningSonstigesCheckbox.setAttribute('name', 'Tuning-Wunsch');
+                        }
+                        // Update in selectedTuning array
+                        const itemIndex = selectedTuning.findIndex(val => val === 'Sonstiges' || val.startsWith('Sonstiges: '));
+                        if (itemIndex !== -1) {
+                            selectedTuning[itemIndex] = tuningSonstigesCheckbox.value;
+                        }
+                    }
+                });
+            }
             
             const items = container.querySelectorAll('.draggable-item');
             items.forEach(item => {
