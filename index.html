@@ -403,8 +403,12 @@
             text-align: center;
             font-size: 1.3em;
             font-weight: 700;
-            color: #25BAA8;
+            color: #6b7280;
             margin-top: 12px;
+        }
+
+        .slider-value.touched {
+            color: #25BAA8;
         }
 
         .image-choice {
@@ -887,66 +891,66 @@
             </div>
 
             <div class="question-group">
-                <label class="question-label">4. Bewerte bitte die folgenden Hardware-Eigenschaften auf einer Skala von "Unwichtig" bis "Absolut entscheidend".</label>
+                <label class="question-label">4. Bewerte bitte die folgenden Hardware-Eigenschaften auf einer Skala von "Unwichtig" bis "Absolut entscheidend".<span class="required">*</span></label>
                 
                 <div style="margin-bottom: 30px;">
                     <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Die weiche Stoffhülle (Softness)</label>
-                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Softness" oninput="updateSliderValue(this, 'value1')">
+                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Softness" data-touched="false" oninput="updateSliderValue(this, 'value1')">
                     <div class="slider-labels">
                         <span>Unwichtig</span>
                         <span>Absolut entscheidend</span>
                     </div>
-                    <div class="slider-value" id="value1">3/5</div>
+                    <div class="slider-value" id="value1">x</div>
                 </div>
 
                 <div style="margin-bottom: 30px;">
                     <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Die Robustheit (hält Stürze aus)</label>
-                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Robustness" oninput="updateSliderValue(this, 'value2')">
+                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Robustness" data-touched="false" oninput="updateSliderValue(this, 'value2')">
                     <div class="slider-labels">
                         <span>Unwichtig</span>
                         <span>Absolut entscheidend</span>
                     </div>
-                    <div class="slider-value" id="value2">3/5</div>
+                    <div class="slider-value" id="value2">x</div>
                 </div>
 
                 <div style="margin-bottom: 30px;">
                     <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Die Akkulaufzeit</label>
-                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Akkulaufzeit" oninput="updateSliderValue(this, 'value3')">
+                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Akkulaufzeit" data-touched="false" oninput="updateSliderValue(this, 'value3')">
                     <div class="slider-labels">
                         <span>Unwichtig</span>
                         <span>Absolut entscheidend</span>
                     </div>
-                    <div class="slider-value" id="value3">3/5</div>
+                    <div class="slider-value" id="value3">x</div>
                 </div>
 
                 <div style="margin-bottom: 30px;">
                     <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Die Größe und das Gewicht</label>
-                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Größe und Gewicht" oninput="updateSliderValue(this, 'value4')">
+                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Größe und Gewicht" data-touched="false" oninput="updateSliderValue(this, 'value4')">
                     <div class="slider-labels">
                         <span>Unwichtig</span>
                         <span>Absolut entscheidend</span>
                     </div>
-                    <div class="slider-value" id="value4">3/5</div>
+                    <div class="slider-value" id="value4">x</div>
                 </div>
 
                 <div style="margin-bottom: 30px;">
                     <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Design im Allgemeinen</label>
-                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Design" oninput="updateSliderValue(this, 'value5')">
+                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Design" data-touched="false" oninput="updateSliderValue(this, 'value5')">
                     <div class="slider-labels">
                         <span>Unwichtig</span>
                         <span>Absolut entscheidend</span>
                     </div>
-                    <div class="slider-value" id="value5">3/5</div>
+                    <div class="slider-value" id="value5">x</div>
                 </div>
 
                 <div style="margin-bottom: 30px;">
                     <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Haptik im Allgemeinen</label>
-                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Haptik" oninput="updateSliderValue(this, 'value6')">
+                    <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Haptik" data-touched="false" oninput="updateSliderValue(this, 'value6')">
                     <div class="slider-labels">
                         <span>Unwichtig</span>
                         <span>Absolut entscheidend</span>
                     </div>
-                    <div class="slider-value" id="value6">3/5</div>
+                    <div class="slider-value" id="value6">x</div>
                 </div>
             </div>
 
@@ -1318,6 +1322,24 @@
                     showModal('Bitte bewerte das Design mit Sternen.');
                     return;
                 }
+                
+                // Validate all hardware property sliders have been moved
+                const hardwareSliders = [
+                    { slider: document.querySelector('input[name="Wichtigkeit - Softness"]'), label: 'die weiche Stoffhülle (Softness)' },
+                    { slider: document.querySelector('input[name="Wichtigkeit - Robustness"]'), label: 'die Robustheit' },
+                    { slider: document.querySelector('input[name="Wichtigkeit - Akkulaufzeit"]'), label: 'die Akkulaufzeit' },
+                    { slider: document.querySelector('input[name="Wichtigkeit - Größe und Gewicht"]'), label: 'Größe und Gewicht' },
+                    { slider: document.querySelector('input[name="Wichtigkeit - Design"]'), label: 'Design im Allgemeinen' },
+                    { slider: document.querySelector('input[name="Wichtigkeit - Haptik"]'), label: 'Haptik im Allgemeinen' }
+                ];
+                
+                for (let item of hardwareSliders) {
+                    if (item.slider.getAttribute('data-touched') === 'false') {
+                        showModal(`Bitte bewerte ${item.label} bei Frage 4.`);
+                        return;
+                    }
+                }
+                
                 const easeOfUse = document.querySelector('input[name="Bedienungsfreundlichkeit"]:checked');
                 if (!easeOfUse) {
                     showModal('Bitte beantworte die Frage zur Bedienung.');
@@ -1400,7 +1422,10 @@
         }
 
         function updateSliderValue(slider, targetId) {
-            document.getElementById(targetId).textContent = slider.value + '/5';
+            const valueDisplay = document.getElementById(targetId);
+            slider.setAttribute('data-touched', 'true');
+            valueDisplay.textContent = slider.value + '/5';
+            valueDisplay.classList.add('touched');
         }
 
         function updatePriceValue(slider) {
