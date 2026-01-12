@@ -37,10 +37,18 @@
         }
 
         .logo {
-            width: 120px;
+            max-width: 200px;
             height: auto;
-            margin-bottom: 20px;
-            filter: brightness(0) invert(1);
+            margin-bottom: 24px;
+            border-radius: 16px;
+            background: white;
+            padding: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .header h1 {
@@ -97,7 +105,7 @@
         }
 
         input[type="text"]:focus,
-        input[type="email"]:focus,
+        input[type="email"]:focus,a
         input[type="number"]:focus,
         textarea:focus,
         select:focus {
@@ -234,9 +242,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <svg class="logo" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-                <text x="100" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="white">StoryPod</text>
-            </svg>
+            <img src="Designer(2).png" alt="StoryPod Logo" class="logo">
             <h1>Ihre Meinung zählt!</h1>
             <p>Helfen Sie uns, das perfekte interaktive Lernerlebnis für Kinder zu schaffen</p>
         </div>
