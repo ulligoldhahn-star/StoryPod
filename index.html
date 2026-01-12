@@ -131,7 +131,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            opacity: 0.08;
+            opacity: 0.15;
             pointer-events: none;
             z-index: 0;
         }
@@ -244,7 +244,7 @@
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.2s ease;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.85);
         }
 
         .checkbox-option:hover,
@@ -374,8 +374,8 @@
 
         .image-choice {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
             margin-top: 20px;
         }
 
@@ -386,7 +386,7 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            background: #f9fafb;
+            background: rgba(249, 250, 251, 0.85);
         }
 
         .image-option:hover {
@@ -484,7 +484,7 @@
 
         .conditional-section {
             display: none;
-            background: #f3f4f6;
+            background: rgba(243, 244, 246, 0.85);
             border-left: 4px solid #6D7BA0;
             padding: 20px;
             margin: 20px 0;
@@ -509,7 +509,7 @@
             border-radius: 10px;
             cursor: move;
             transition: all 0.2s ease;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.85);
             user-select: none;
         }
 
@@ -639,7 +639,7 @@
             .page::before {
                 background-size: cover;
                 background-position: center;
-                opacity: 0.06;
+                opacity: 0.12;
             }
 
             .intro-box {
@@ -1064,7 +1064,7 @@
 
             <div class="question-group">
                 <label class="question-label">11. Du hast den Storypod nun erlebt. Welchen Preis empfindest du für das Starterset (Player + eine erste Figur/Karte) als fair?</label>
-                <input type="range" class="slider" min="69" max="139" value="69" name="Fairer Preis Starterset" oninput="updatePriceValue(this)" id="priceSlider">
+                <input type="range" class="slider" min="69" max="139" value="104" name="Fairer Preis Starterset" oninput="updatePriceValue(this)" id="priceSlider">
                 <div class="slider-labels">
                     <span>€69</span>
                     <span>€139</span>
@@ -1175,7 +1175,7 @@
 
     <script>
         let currentPage = 0;
-        const totalPages = 6;
+        const totalPages = 5;
 
         function updateProgress() {
             const progress = Math.round((currentPage / totalPages) * 100);
@@ -1223,6 +1223,16 @@
                 if (!easeOfUse) {
                     showModal('Bitte beantworte die Frage zur Bedienung.');
                     return;
+                }
+                
+                // Check if "Sonstiges" is selected in tuning options
+                const tuningSonstiges = document.getElementById('tuningSonstiges');
+                if (tuningSonstiges && tuningSonstiges.checked) {
+                    const tuningSonstigesText = document.getElementById('tuningSonstigesText');
+                    if (!tuningSonstigesText || !tuningSonstigesText.value.trim()) {
+                        showModal('Bitte gib deine Idee für "Sonstiges" bei Frage 6 ein.');
+                        return;
+                    }
                 }
             }
 
