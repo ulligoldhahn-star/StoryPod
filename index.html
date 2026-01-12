@@ -128,10 +128,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-size: 400px;
+            background-size: 600px;
             background-repeat: no-repeat;
-            background-position: bottom right;
-            opacity: 0.08;
+            background-position: bottom -50px right -50px;
+            opacity: 0.12;
             pointer-events: none;
             z-index: 0;
         }
@@ -205,12 +205,12 @@
         textarea {
             width: 100%;
             padding: 16px 18px;
-            border: 2px solid #e5e7eb;
+            border: 2px solid #fbbf24;
             border-radius: 12px;
             font-size: 1em;
             font-family: inherit;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: #97A4C4;
+            background: #f9fafb;
             color: #1f2937;
         }
 
@@ -453,6 +453,8 @@
 
         .btn-secondary:hover {
             background: #d1d5db;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
 
         .success-message {
@@ -555,6 +557,62 @@
             font-style: italic;
         }
 
+        .custom-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 18px;
+            padding: 40px;
+            max-width: 450px;
+            margin: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .modal-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .modal-message {
+            font-size: 1.1em;
+            color: #374151;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .modal-button {
+            background: linear-gradient(135deg, #25BAA8 0%, #156082 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-size: 1.05em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 186, 168, 0.4);
+        }
+
         @media (max-width: 768px) {
             .header {
                 padding: 40px 25px;
@@ -579,8 +637,9 @@
             }
 
             .page::before {
-                background-size: 250px;
-                opacity: 0.05;
+                background-size: 350px;
+                background-position: bottom -30px right -30px;
+                opacity: 0.08;
             }
 
             .intro-box {
@@ -730,16 +789,9 @@
                 </div>
             </div>
 
-            <div class="conditional-section" id="lowRating">
-                <strong>Oh, das bedauern wir. Hilf uns, es besser zu machen!</strong>
-                <label class="question-label" style="margin-top: 16px;">Was genau hat dir nicht gefallen oder was fehlt dir?<span class="required">*</span></label>
-                <textarea id="lowRatingText" name="Feedback zu niedrigem Design-Rating" placeholder="Dein Feedback..."></textarea>
-            </div>
-
-            <div class="conditional-section" id="highRating">
-                <strong>Wow, das freut uns riesig!</strong>
-                <label class="question-label" style="margin-top: 16px;">Was genau findest du am Design besonders gelungen?</label>
-                <textarea id="highRatingText" name="Feedback zu hohem Design-Rating" placeholder="Dein Feedback..."></textarea>
+            <div style="margin-top: 30px;">
+                <label class="question-label">Was genau gefällt dir am Design oder was würdest du verbessern?</label>
+                <textarea name="Feedback zu Design" placeholder="Dein Feedback..."></textarea>
             </div>
 
             <div class="question-group">
@@ -1012,23 +1064,23 @@
 
             <div class="question-group">
                 <label class="question-label">13. Stell dir vor, es gäbe ein "Storypod Club-Abo" für 9,99 €/Monat, das dir jeden Monat neue, exklusive Inhalte freischaltet und Rabatte auf Zubehör gibt. Wie klingt das für dich?<span class="required">*</span></label>
-                <div style="margin-bottom: 12px;">
-                    <div style="display: flex; justify-content: space-between; color: #6b7280; font-size: 0.9em; margin-bottom: 8px;">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 20px;">
+                    <div style="display: flex; justify-content: space-between; width: 100%; max-width: 400px; color: #6b7280; font-size: 0.9em;">
                         <span>Absolut uninteressant</span>
                         <span>Klingt super!</span>
                     </div>
-                </div>
-                <div class="star-rating">
-                    <input type="radio" name="Abo-Interesse" id="sub5" value="5" required>
-                    <label for="sub5">★</label>
-                    <input type="radio" name="Abo-Interesse" id="sub4" value="4">
-                    <label for="sub4">★</label>
-                    <input type="radio" name="Abo-Interesse" id="sub3" value="3">
-                    <label for="sub3">★</label>
-                    <input type="radio" name="Abo-Interesse" id="sub2" value="2">
-                    <label for="sub2">★</label>
-                    <input type="radio" name="Abo-Interesse" id="sub1" value="1">
-                    <label for="sub1">★</label>
+                    <div class="star-rating">
+                        <input type="radio" name="Abo-Interesse" id="sub5" value="5" required>
+                        <label for="sub5">★</label>
+                        <input type="radio" name="Abo-Interesse" id="sub4" value="4">
+                        <label for="sub4">★</label>
+                        <input type="radio" name="Abo-Interesse" id="sub3" value="3">
+                        <label for="sub3">★</label>
+                        <input type="radio" name="Abo-Interesse" id="sub2" value="2">
+                        <label for="sub2">★</label>
+                        <input type="radio" name="Abo-Interesse" id="sub1" value="1">
+                        <label for="sub1">★</label>
+                    </div>
                 </div>
             </div>
 
@@ -1081,6 +1133,14 @@
         </div>
     </div>
 
+    <div class="custom-modal" id="customModal">
+        <div class="modal-content">
+            <div class="modal-icon">⚠️</div>
+            <div class="modal-message" id="modalMessage"></div>
+            <button class="modal-button" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
     <script>
         let currentPage = 0;
         const totalPages = 7;
@@ -1091,19 +1151,28 @@
             document.getElementById('progressText').textContent = progress + '/100%';
         }
 
+        function showModal(message) {
+            document.getElementById('modalMessage').textContent = message;
+            document.getElementById('customModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').classList.remove('show');
+        }
+
         function nextPage() {
             // Validation
             if (currentPage === 1) {
                 const familyChecked = document.querySelectorAll('input[name="Familie"]:checked');
                 if (familyChecked.length === 0) {
-                    alert('Bitte wähle mindestens eine Option bei Frage 1 aus.');
+                    showModal('Bitte wähle mindestens eine Option bei Frage 1 aus.');
                     return;
                 }
                 
                 // Check if at least one checkbox in audio systems matrix is checked
                 const audioChecked = document.querySelectorAll('input[name="Audio-Systeme"]:checked');
                 if (audioChecked.length === 0) {
-                    alert('Bitte wähle mindestens eine Option bei Frage 2 (Audio-Systeme) aus.');
+                    showModal('Bitte wähle mindestens eine Option bei Frage 2 (Audio-Systeme) aus.');
                     return;
                 }
             }
@@ -1111,12 +1180,12 @@
             if (currentPage === 2) {
                 const designRating = document.querySelector('input[name="Design Rating"]:checked');
                 if (!designRating) {
-                    alert('Bitte bewerte das Design mit Sternen.');
+                    showModal('Bitte bewerte das Design mit Sternen.');
                     return;
                 }
                 const easeOfUse = document.querySelector('input[name="Bedienungsfreundlichkeit"]:checked');
                 if (!easeOfUse) {
-                    alert('Bitte beantworte die Frage zur Bedienung.');
+                    showModal('Bitte beantworte die Frage zur Bedienung.');
                     return;
                 }
             }
@@ -1125,11 +1194,11 @@
                 const goals = document.querySelectorAll('input[name="Hauptziele"]:checked');
                 const appFeatures = document.querySelectorAll('input[name="App-Funktionen"]:checked');
                 if (goals.length === 0) {
-                    alert('Bitte wähle mindestens ein Hauptziel aus.');
+                    showModal('Bitte wähle mindestens ein Hauptziel aus.');
                     return;
                 }
                 if (appFeatures.length === 0) {
-                    alert('Bitte wähle mindestens eine App-Funktion aus.');
+                    showModal('Bitte wähle mindestens eine App-Funktion aus.');
                     return;
                 }
             }
@@ -1137,14 +1206,14 @@
             if (currentPage === 4) {
                 const aboRating = document.querySelector('input[name="Abo-Interesse"]:checked');
                 if (!aboRating) {
-                    alert('Bitte bewerte das Abo-Modell mit Sternen.');
+                    showModal('Bitte bewerte das Abo-Modell mit Sternen.');
                     return;
                 }
                 const rating = parseInt(aboRating.value);
                 if (rating <= 3) {
                     const lowAboText = document.getElementById('lowAboText');
                     if (!lowAboText.value.trim()) {
-                        alert('Bitte teile uns mit, was ein Abo-Modell für dich interessant machen würde.');
+                        showModal('Bitte teile uns mit, was ein Abo-Modell für dich interessant machen würde.');
                         return;
                     }
                 }
@@ -1173,26 +1242,6 @@
             document.getElementById('priceValue').textContent = '€' + slider.value;
         }
 
-        // Design rating conditional logic
-        document.querySelectorAll('input[name="Design Rating"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const rating = parseInt(this.value);
-                const lowRating = document.getElementById('lowRating');
-                const highRating = document.getElementById('highRating');
-                
-                if (rating <= 3) {
-                    lowRating.classList.add('show');
-                    highRating.classList.remove('show');
-                } else if (rating === 5) {
-                    highRating.classList.add('show');
-                    lowRating.classList.remove('show');
-                } else {
-                    lowRating.classList.remove('show');
-                    highRating.classList.remove('show');
-                }
-            });
-        });
-
         // Abo rating conditional logic
         document.querySelectorAll('input[name="Abo-Interesse"]').forEach(radio => {
             radio.addEventListener('change', function() {
@@ -1207,6 +1256,94 @@
                     lowAboRating.classList.remove('show');
                     lowAboText.required = false;
                 }
+            });
+        });
+
+        // Audio Systems Matrix Exclusivity Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle "Nicht bekannt" exclusivity in audio systems matrix
+            const audioSystemRows = {
+                'Toniebox': ['Toniebox - Nicht bekannt', 'Toniebox - Kenne ich', 'Toniebox - Haben wir', 'Toniebox - Nutzen aktiv'],
+                'Tigerbox': ['Tigerbox - Nicht bekannt', 'Tigerbox - Kenne ich', 'Tigerbox - Haben wir', 'Tigerbox - Nutzen aktiv'],
+                'Yoto': ['Yoto - Nicht bekannt', 'Yoto - Kenne ich', 'Yoto - Haben wir', 'Yoto - Nutzen aktiv']
+            };
+
+            document.querySelectorAll('input[name="Audio-Systeme"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const value = this.value;
+                    
+                    // Check if "Nicht bekannt" was checked
+                    if (value.includes('Nicht bekannt') && this.checked) {
+                        // Find which system this is for
+                        for (let system in audioSystemRows) {
+                            if (value.includes(system)) {
+                                // Uncheck and disable all other options for this system
+                                audioSystemRows[system].forEach(optionValue => {
+                                    if (optionValue !== value) {
+                                        const otherCheckbox = document.querySelector(`input[name="Audio-Systeme"][value="${optionValue}"]`);
+                                        if (otherCheckbox) {
+                                            otherCheckbox.checked = false;
+                                            otherCheckbox.disabled = true;
+                                            otherCheckbox.parentElement.style.opacity = '0.5';
+                                        }
+                                    }
+                                });
+                                break;
+                            }
+                        }
+                    } else if (value.includes('Nicht bekannt') && !this.checked) {
+                        // If "Nicht bekannt" was unchecked, re-enable other options
+                        for (let system in audioSystemRows) {
+                            if (value.includes(system)) {
+                                audioSystemRows[system].forEach(optionValue => {
+                                    if (optionValue !== value) {
+                                        const otherCheckbox = document.querySelector(`input[name="Audio-Systeme"][value="${optionValue}"]`);
+                                        if (otherCheckbox) {
+                                            otherCheckbox.disabled = false;
+                                            otherCheckbox.parentElement.style.opacity = '1';
+                                        }
+                                    }
+                                });
+                                break;
+                            }
+                        }
+                    } else if (this.checked) {
+                        // If any other option is checked, uncheck and disable "Nicht bekannt"
+                        for (let system in audioSystemRows) {
+                            if (value.includes(system)) {
+                                const nichtBekanntValue = `${system} - Nicht bekannt`;
+                                const nichtBekanntCheckbox = document.querySelector(`input[name="Audio-Systeme"][value="${nichtBekanntValue}"]`);
+                                if (nichtBekanntCheckbox) {
+                                    nichtBekanntCheckbox.checked = false;
+                                    nichtBekanntCheckbox.disabled = true;
+                                    nichtBekanntCheckbox.parentElement.style.opacity = '0.5';
+                                }
+                                break;
+                            }
+                        }
+                    } else {
+                        // If unchecking, check if any other option in this row is still checked
+                        for (let system in audioSystemRows) {
+                            if (value.includes(system)) {
+                                const anyChecked = audioSystemRows[system].some(optionValue => {
+                                    const cb = document.querySelector(`input[name="Audio-Systeme"][value="${optionValue}"]`);
+                                    return cb && cb.checked && optionValue !== value;
+                                });
+                                
+                                if (!anyChecked) {
+                                    // Re-enable "Nicht bekannt" if nothing else is checked
+                                    const nichtBekanntValue = `${system} - Nicht bekannt`;
+                                    const nichtBekanntCheckbox = document.querySelector(`input[name="Audio-Systeme"][value="${nichtBekanntValue}"]`);
+                                    if (nichtBekanntCheckbox) {
+                                        nichtBekanntCheckbox.disabled = false;
+                                        nichtBekanntCheckbox.parentElement.style.opacity = '1';
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    }
+                });
             });
         });
 
@@ -1289,53 +1426,84 @@
         }
 
         let draggedItem = null;
+        let draggedIndex = -1;
 
         function handleDragStart(e) {
             draggedItem = this;
+            const container = document.getElementById('selectedTuning');
+            const items = [...container.querySelectorAll('.draggable-item')];
+            draggedIndex = items.indexOf(this);
+            
             this.classList.add('dragging');
             e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/html', this.innerHTML);
+            e.dataTransfer.setData('text/plain', draggedIndex);
         }
 
         function handleDragOver(e) {
             e.preventDefault();
             e.dataTransfer.dropEffect = 'move';
+            
+            const afterElement = getDragAfterElement(e.clientY);
+            const container = document.getElementById('selectedTuning');
+            const draggable = draggedItem;
+            
+            if (afterElement == null) {
+                const items = [...container.querySelectorAll('.draggable-item:not(.dragging)')];
+                if (items.length > 0) {
+                    container.appendChild(draggable);
+                }
+            } else {
+                container.insertBefore(draggable, afterElement);
+            }
+            
             return false;
         }
 
         function handleDragEnter(e) {
-            if (this !== draggedItem) {
-                this.classList.add('drag-over');
-            }
+            e.preventDefault();
         }
 
         function handleDrop(e) {
-            e.stopPropagation();
             e.preventDefault();
-            
-            if (draggedItem && draggedItem !== this) {
-                const container = document.getElementById('selectedTuning');
-                const allItems = [...container.querySelectorAll('.draggable-item')];
-                const draggedIndex = allItems.indexOf(draggedItem);
-                const targetIndex = allItems.indexOf(this);
-                
-                if (draggedIndex !== -1 && targetIndex !== -1) {
-                    const draggedValue = selectedTuning[draggedIndex];
-                    selectedTuning.splice(draggedIndex, 1);
-                    selectedTuning.splice(targetIndex, 0, draggedValue);
-                    
-                    allItems.forEach(item => item.classList.remove('drag-over'));
-                    updateTuningRanking();
-                }
-            }
-            
+            e.stopPropagation();
             return false;
         }
 
         function handleDragEnd(e) {
             this.classList.remove('dragging');
-            const allItems = document.querySelectorAll('#selectedTuning .draggable-item');
-            allItems.forEach(item => item.classList.remove('drag-over'));
+            
+            // Update the selectedTuning array based on new DOM order
+            const container = document.getElementById('selectedTuning');
+            const items = [...container.querySelectorAll('.draggable-item')];
+            const newOrder = items.map(item => item.getAttribute('data-value'));
+            selectedTuning = newOrder;
+            
+            // Update rank badges
+            items.forEach((item, index) => {
+                const badge = item.querySelector('.rank-badge');
+                if (badge) {
+                    badge.textContent = index + 1;
+                }
+            });
+            
+            draggedItem = null;
+            draggedIndex = -1;
+        }
+
+        function getDragAfterElement(y) {
+            const container = document.getElementById('selectedTuning');
+            const draggableElements = [...container.querySelectorAll('.draggable-item:not(.dragging)')];
+            
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+                
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
         }
 
         // Image option selection
@@ -1382,7 +1550,7 @@
         function submitSurvey() {
             const email = document.getElementById('finalEmail').value;
             if (!email) {
-                alert('Bitte gib deine E-Mail-Adresse ein, um deinen Rabatt-Code zu erhalten.');
+                showModal('Bitte gib deine E-Mail-Adresse ein, um deinen Rabatt-Code zu erhalten.');
                 return;
             }
 
