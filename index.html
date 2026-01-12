@@ -726,7 +726,7 @@
 
         <!-- Page 1: Familie -->
         <div class="page" id="page1">
-            <h2 class="section-title"><span class="section-icon">👨‍👩‍👧‍👦</span>Teil 1: Erzähl uns kurz von deiner Familie</h2>
+            <h2 class="section-title">Teil 1: Erzähl uns kurz von deiner Familie</h2>
             <p class="section-subtitle">Das hilft uns, dein Feedback besser einzuordnen.</p>
 
             <div class="question-group">
@@ -756,7 +756,55 @@
             </div>
 
             <div class="question-group">
-                <label class="question-label">2. Welche Audio-Systeme für Kinder kennt oder nutzt ihr bereits?<span class="required">*</span></label>
+                <label class="question-label">2. Wer füllt diese Umfrage aus?<span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="gender1" name="Geschlecht" value="Mutter" required>
+                        <label for="gender1">Mutter</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="gender2" name="Geschlecht" value="Vater">
+                        <label for="gender2">Vater</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="gender3" name="Geschlecht" value="Großeltern">
+                        <label for="gender3">Großeltern</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="gender4" name="Geschlecht" value="Sonstiges">
+                        <label for="gender4">Sonstiges</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label class="question-label">3. Wie alt bist du?<span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="age1" name="Alter" value="Unter 25 Jahre" required>
+                        <label for="age1">Unter 25 Jahre</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="age2" name="Alter" value="25-34 Jahre">
+                        <label for="age2">25-34 Jahre</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="age3" name="Alter" value="35-44 Jahre">
+                        <label for="age3">35-44 Jahre</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="age4" name="Alter" value="45-54 Jahre">
+                        <label for="age4">45-54 Jahre</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="age5" name="Alter" value="55+ Jahre">
+                        <label for="age5">55+ Jahre</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label class="question-label">4. Welche Audio-Systeme für Kinder kennt oder nutzt ihr bereits?<span class="required">*</span></label>
                 <table class="matrix-table">
                     <thead>
                         <tr>
@@ -801,7 +849,7 @@
 
         <!-- Page 2: Hardware Feedback -->
         <div class="page" id="page2">
-            <h2 class="section-title"><span class="section-icon">🎧</span>Teil 2: Der Storypod in deinen Händen</h2>
+            <h2 class="section-title">Teil 2: Der Storypod in deinen Händen</h2>
             <p class="section-subtitle">Super, der erste Teil ist geschafft! Jetzt geht es ans Eingemachte: Wie fühlt sich der Storypod an?</p>
 
             <div class="question-group">
@@ -980,7 +1028,7 @@
 
         <!-- Page 3: App & Software -->
         <div class="page" id="page3">
-            <h2 class="section-title"><span class="section-icon">📱</span>Teil 3: Die App & die "inneren Werte"</h2>
+            <h2 class="section-title">Teil 3: Die App & die "inneren Werte"</h2>
             <p class="section-subtitle">Klasse, danke für das Hardware-Feedback! Lass uns nun einen Blick auf die Software und die App werfen.</p>
 
             <div class="question-group">
@@ -1090,7 +1138,7 @@
 
         <!-- Page 4: Pricing -->
         <div class="page" id="page4">
-            <h2 class="section-title"><span class="section-icon">💶</span>Teil 4: Das liebe Geld</h2>
+            <h2 class="section-title">Teil 4: Das liebe Geld</h2>
             <p class="section-subtitle">Letzte Runde! Deine ehrliche Einschätzung hilft uns, ein faires Angebot zu schaffen. Du bist fast am Ziel!</p>
 
             <div class="question-group">
@@ -1232,13 +1280,25 @@
                     return;
                 }
                 
+                const genderChecked = document.querySelector('input[name="Geschlecht"]:checked');
+                if (!genderChecked) {
+                    showModal('Bitte gib an, wer diese Umfrage ausfüllt (Frage 2).');
+                    return;
+                }
+                
+                const ageChecked = document.querySelector('input[name="Alter"]:checked');
+                if (!ageChecked) {
+                    showModal('Bitte gib dein Alter an (Frage 3).');
+                    return;
+                }
+                
                 // Check if each row in audio systems matrix has at least one checkbox checked
                 const audioSystemRows = ['Toniebox', 'Tigerbox', 'Yoto'];
                 for (let system of audioSystemRows) {
                     const rowChecked = Array.from(document.querySelectorAll('input[name="Audio-Systeme"]:checked'))
                         .some(checkbox => checkbox.value.includes(system));
                     if (!rowChecked) {
-                        showModal(`Bitte wähle mindestens eine Option für ${system} bei Frage 2 aus.`);
+                        showModal(`Bitte wähle mindestens eine Option für ${system} bei Frage 4 aus.`);
                         return;
                     }
                 }
