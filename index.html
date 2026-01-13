@@ -83,6 +83,12 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            display: none;
+        }
+        
+        .page:not(#page0) ~ .progress-container,
+        body:has(.page:not(#page0).active) .progress-container {
+            display: block;
         }
 
         .progress-bar {
@@ -1287,6 +1293,14 @@
         const totalPages = 5;
 
         function updateProgress() {
+            // Fortschrittsbalken ausblenden auf Seite 0
+            const progressContainer = document.querySelector('.progress-container');
+            if (currentPage === 0) {
+                progressContainer.style.display = 'none';
+            } else {
+                progressContainer.style.display = 'block';
+            }
+            
             // Fortschritt zeigt ausgefüllte Seiten an (nicht die aktuelle Seite)
             // Page 0 (Intro) zählt nicht, also currentPage - 1 für ausgefüllte Seiten
             const completedPages = currentPage > 0 ? currentPage - 1 : 0;
