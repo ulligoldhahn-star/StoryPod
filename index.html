@@ -1912,38 +1912,22 @@
             });
         });
 
-        // Checkbox option selection (Frage 7 & 8)
-        document.querySelectorAll('.checkbox-option').forEach(option => {
-            option.addEventListener('click', function(e) {
-                // Ignore if clicking directly on input or label
-                if (e.target.tagName === 'INPUT' || e.target.tagName === 'LABEL') {
-                    return;
-                }
-                
-                const input = this.querySelector('input[type="checkbox"]');
-                if (!input || input.disabled) {
-                    return;
-                }
-                
-                // Toggle checkbox
-                input.checked = !input.checked;
-                
-                // Trigger change event
-                const event = new Event('change', { bubbles: true });
-                input.dispatchEvent(event);
-            });
-        });
-
         // Checkbox/Radio option click handling
         document.querySelectorAll('.checkbox-option, .radio-option').forEach(option => {
             option.addEventListener('click', function(e) {
                 if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
                     const input = this.querySelector('input');
+                    if (!input || input.disabled) {
+                        return;
+                    }
                     if (input.type === 'radio') {
                         input.checked = true;
                     } else {
                         input.checked = !input.checked;
                     }
+                    // Trigger change event
+                    const event = new Event('change', { bubbles: true });
+                    input.dispatchEvent(event);
                 }
             });
         });
