@@ -237,7 +237,7 @@
         }
 
         .question-group {
-            margin-bottom: 40px;
+            margin-bottom: 24px;
         }
 
         .question-label {
@@ -1288,7 +1288,10 @@
         const totalPages = 5;
 
         function updateProgress() {
-            const progress = Math.round((currentPage / totalPages) * 100);
+            // Fortschritt zeigt ausgefüllte Seiten an (nicht die aktuelle Seite)
+            // Page 0 (Intro) zählt nicht, also currentPage - 1 für ausgefüllte Seiten
+            const completedPages = currentPage > 0 ? currentPage - 1 : 0;
+            const progress = Math.round((completedPages / (totalPages - 1)) * 100);
             document.getElementById('progressFill').style.width = progress + '%';
             document.getElementById('progressText').textContent = progress + '/100%';
         }
