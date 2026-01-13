@@ -242,6 +242,13 @@
 
         .question-group {
             margin-bottom: 24px;
+            padding-top: 24px;
+            border-top: 2px solid #e5e7eb;
+        }
+        
+        .question-group:first-of-type {
+            border-top: none;
+            padding-top: 0;
         }
 
         .question-label {
@@ -328,6 +335,23 @@
             flex: 1;
             font-weight: 500;
             color: #374151;
+            user-select: none;
+        }
+        
+        .checkbox-option,
+        .radio-option {
+            position: relative;
+        }
+        
+        .checkbox-option input[type="checkbox"],
+        .radio-option input[type="radio"] {
+            pointer-events: none;
+        }
+        
+        .checkbox-option:has(input:checked),
+        .radio-option:has(input:checked) {
+            border-color: #25BAA8;
+            background: rgba(37, 186, 168, 0.05);
         }
 
         .matrix-table {
@@ -426,7 +450,7 @@
             text-align: center;
             font-size: 1.3em;
             font-weight: 700;
-            color: #6b7280;
+            color: #25BAA8;
             margin-top: 12px;
         }
 
@@ -526,7 +550,7 @@
 
         .success-icon {
             font-size: 5em;
-            margin-bottom: 24px;
+            margin-bottom: 12px;
         }
 
         .success-message h2 {
@@ -1888,6 +1912,28 @@
             });
         });
 
+        // Checkbox option selection (Frage 7 & 8)
+        document.querySelectorAll('.checkbox-option').forEach(option => {
+            option.addEventListener('click', function(e) {
+                // Ignore if clicking directly on input or label
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'LABEL') {
+                    return;
+                }
+                
+                const input = this.querySelector('input[type="checkbox"]');
+                if (!input || input.disabled) {
+                    return;
+                }
+                
+                // Toggle checkbox
+                input.checked = !input.checked;
+                
+                // Trigger change event
+                const event = new Event('change', { bubbles: true });
+                input.dispatchEvent(event);
+            });
+        });
+
         // Checkbox/Radio option click handling
         document.querySelectorAll('.checkbox-option, .radio-option').forEach(option => {
             option.addEventListener('click', function(e) {
@@ -1998,5 +2044,3 @@ Dein Storypod Team`;
     </script>
 </body>
 </html>
-
-
