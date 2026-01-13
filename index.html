@@ -912,7 +912,7 @@
             <div class="question-group">
                 <label class="question-label">4. Bewerte bitte die folgenden Hardware-Eigenschaften auf einer Skala von "Unwichtig" bis "Absolut entscheidend".<span class="required">*</span></label>
                 
-                <div style="margin-bottom: 30px; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
+                <div style="margin-bottom: 16px; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
                     <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Die weiche Stoffhülle (Softness)</label>
                     <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Softness" data-touched="false" oninput="updateSliderValue(this, 'value1')">
                     <div class="slider-labels">
@@ -922,7 +922,7 @@
                     <div class="slider-value" id="value1">x</div>
                 </div>
 
-                <div style="margin-bottom: 30px; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
+                <div style="margin-bottom: 16px; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
                     <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Die Robustheit (hält Stürze aus)</label>
                     <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Robustness" data-touched="false" oninput="updateSliderValue(this, 'value2')">
                     <div class="slider-labels">
@@ -932,7 +932,7 @@
                     <div class="slider-value" id="value2">x</div>
                 </div>
 
-                <div style="margin-bottom: 30px; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
+                <div style="margin-bottom: 16px; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
                     <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Die Akkulaufzeit</label>
                     <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Akkulaufzeit" data-touched="false" oninput="updateSliderValue(this, 'value3')">
                     <div class="slider-labels">
@@ -942,7 +942,7 @@
                     <div class="slider-value" id="value3">x</div>
                 </div>
 
-                <div style="margin-bottom: 30px; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
+                <div style="margin-bottom: 16px; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
                     <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Die Größe und das Gewicht</label>
                     <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Größe und Gewicht" data-touched="false" oninput="updateSliderValue(this, 'value4')">
                     <div class="slider-labels">
@@ -952,7 +952,7 @@
                     <div class="slider-value" id="value4">x</div>
                 </div>
 
-                <div style="margin-bottom: 30px; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
+                <div style="margin-bottom: 16px; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
                     <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Design im Allgemeinen</label>
                     <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Design" data-touched="false" oninput="updateSliderValue(this, 'value5')">
                     <div class="slider-labels">
@@ -962,7 +962,7 @@
                     <div class="slider-value" id="value5">x</div>
                 </div>
 
-                <div style="margin-bottom: 30px; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
+                <div style="margin-bottom: 0px; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
                     <label style="font-weight: 500; color: #374151; display: block; margin-bottom: 12px;">Haptik im Allgemeinen</label>
                     <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Haptik" data-touched="false" oninput="updateSliderValue(this, 'value6')">
                     <div class="slider-labels">
@@ -1701,6 +1701,11 @@
                     }
                 });
             }
+            
+            // Initialize all groups on page load
+            ['hauptziele', 'appfunktionen', 'tuning'].forEach(group => {
+                updateGroupCheckboxes(group);
+            });
         });
 
         // Tuning feature selection with ranking
