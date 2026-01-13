@@ -857,24 +857,6 @@
             .tuning-ranking {
                 padding: 16px;
             }
-
-            /* Frage 13 - Abo Rating Mobile */
-            .question-group > div[style*="display: flex"] {
-                padding: 14px !important;
-                max-width: 100% !important;
-                margin-left: 0 !important;
-                margin-right: 0 !important;
-            }
-
-            .question-group > div[style*="display: flex"] > span {
-                font-size: 0.75em !important;
-                white-space: nowrap !important;
-            }
-
-            .question-group > div[style*="display: flex"] .star-rating {
-                margin: 0 10px !important;
-                transform: scale(0.9);
-            }
         }
     </style>
 </head>
@@ -1082,7 +1064,7 @@
                     <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Softness" data-touched="false" oninput="updateSliderValue(this, 'value1')">
                     <div class="slider-labels">
                         <span>Unwichtig</span>
-                        <span>Absolut entscheidend</span>
+                        <span>Absolut<br>entscheidend</span>
                     </div>
                     <div class="slider-value" id="value1">x</div>
                 </div>
@@ -1092,7 +1074,7 @@
                     <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Robustness" data-touched="false" oninput="updateSliderValue(this, 'value2')">
                     <div class="slider-labels">
                         <span>Unwichtig</span>
-                        <span>Absolut entscheidend</span>
+                        <span>Absolut<br>entscheidend</span>
                     </div>
                     <div class="slider-value" id="value2">x</div>
                 </div>
@@ -1102,7 +1084,7 @@
                     <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Akkulaufzeit" data-touched="false" oninput="updateSliderValue(this, 'value3')">
                     <div class="slider-labels">
                         <span>Unwichtig</span>
-                        <span>Absolut entscheidend</span>
+                        <span>Absolut<br>entscheidend</span>
                     </div>
                     <div class="slider-value" id="value3">x</div>
                 </div>
@@ -1112,7 +1094,7 @@
                     <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Größe und Gewicht" data-touched="false" oninput="updateSliderValue(this, 'value4')">
                     <div class="slider-labels">
                         <span>Unwichtig</span>
-                        <span>Absolut entscheidend</span>
+                        <span>Absolut<br>entscheidend</span>
                     </div>
                     <div class="slider-value" id="value4">x</div>
                 </div>
@@ -1122,7 +1104,7 @@
                     <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Design" data-touched="false" oninput="updateSliderValue(this, 'value5')">
                     <div class="slider-labels">
                         <span>Unwichtig</span>
-                        <span>Absolut entscheidend</span>
+                        <span>Absolut<br>entscheidend</span>
                     </div>
                     <div class="slider-value" id="value5">x</div>
                 </div>
@@ -1132,7 +1114,7 @@
                     <input type="range" class="slider" min="1" max="5" value="3" name="Wichtigkeit - Haptik" data-touched="false" oninput="updateSliderValue(this, 'value6')">
                     <div class="slider-labels">
                         <span>Unwichtig</span>
-                        <span>Absolut entscheidend</span>
+                        <span>Absolut<br>entscheidend</span>
                     </div>
                     <div class="slider-value" id="value6">x</div>
                 </div>
@@ -1367,9 +1349,8 @@
 
             <div class="question-group">
                 <label class="question-label">13. Stell dir vor, es gäbe ein "Storypod Club-Abo" für 9,99 €/Monat, das dir jeden Monat neue, exklusive Inhalte freischaltet und Rabatte auf Zubehör gibt. Wie klingt das für dich?<span class="required">*</span></label>
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
-                    <span style="color: #6b7280; font-size: 0.9em; white-space: nowrap;">Uninteressant</span>
-                    <div class="star-rating" style="margin: 0 20px;">
+                <div style="margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
+                    <div class="star-rating" style="margin: 0 auto; display: flex; justify-content: center; margin-bottom: 12px;">
                         <input type="radio" name="Abo-Interesse" id="sub5" value="5" required>
                         <label for="sub5">★</label>
                         <input type="radio" name="Abo-Interesse" id="sub4" value="4">
@@ -1381,7 +1362,10 @@
                         <input type="radio" name="Abo-Interesse" id="sub1" value="1">
                         <label for="sub1">★</label>
                     </div>
-                    <span style="color: #6b7280; font-size: 0.9em; white-space: nowrap;">Super!</span>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #6b7280; font-size: 0.9em;">Uninteressant</span>
+                        <span style="color: #6b7280; font-size: 0.9em;">Super!</span>
+                    </div>
                 </div>
             </div>
 
