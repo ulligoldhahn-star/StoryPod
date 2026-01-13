@@ -700,8 +700,14 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
             .header {
-                padding: 40px 25px;
+                padding: 30px 20px;
                 flex-direction: column-reverse;
                 text-align: center;
             }
@@ -711,15 +717,21 @@
             }
 
             .logo {
-                max-width: 200px;
+                max-width: 150px;
+                margin-bottom: 16px;
             }
 
             .header h1 {
-                font-size: 2em;
+                font-size: 2.2em;
+                margin-bottom: 12px;
+            }
+
+            .header p {
+                font-size: 1.1em;
             }
 
             .page {
-                padding: 30px 25px;
+                padding: 25px 20px;
             }
 
             .page::before {
@@ -729,15 +741,127 @@
             }
 
             .intro-box {
-                margin: 20px 25px;
+                margin: 20px 0;
+                padding: 18px;
+                font-size: 0.95em;
             }
 
-            .progress-bar {
-                margin: 0 25px 20px;
+            .progress-container {
+                margin: 10px 20px 12px;
+                padding: 16px;
+            }
+
+            .progress-text {
+                font-size: 0.9em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+                padding: 16px 18px;
+                margin-bottom: 20px;
+            }
+
+            .section-subtitle {
+                font-size: 0.65em;
+            }
+
+            .question-label {
+                font-size: 1.05em;
+                margin-bottom: 14px;
+            }
+
+            .question-group {
+                padding-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            textarea {
+                padding: 14px 16px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .checkbox-option,
+            .radio-option {
+                padding: 12px 14px;
+                font-size: 0.95em;
+            }
+
+            .checkbox-option input,
+            .radio-option input {
+                width: 20px;
+                height: 20px;
+                margin-right: 12px;
             }
 
             .image-choice {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .image-option {
+                padding: 16px 12px;
+            }
+
+            .image-option .emoji {
+                font-size: 2em;
+            }
+
+            .image-option input {
+                width: 20px;
+                height: 20px;
+            }
+
+            .matrix-table {
+                font-size: 0.85em;
+            }
+
+            .matrix-table th,
+            .matrix-table td {
+                padding: 10px 6px;
+            }
+
+            .slider-labels {
+                font-size: 0.85em;
+            }
+
+            .slider-value {
+                font-size: 1.1em;
+            }
+
+            .nav-buttons {
+                flex-direction: column-reverse;
+                gap: 12px;
+                margin-top: 30px;
+                padding-top: 24px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 14px 24px;
+                font-size: 1em;
+            }
+
+            .success-icon {
+                font-size: 4em;
+            }
+
+            .success-message h2 {
+                font-size: 2em;
+            }
+
+            .success-message p {
+                font-size: 1em;
+            }
+
+            .conditional-section {
+                padding: 16px;
+                margin: 16px 0;
+            }
+
+            .tuning-ranking {
+                padding: 16px;
             }
         }
     </style>
