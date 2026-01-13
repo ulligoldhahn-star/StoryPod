@@ -338,16 +338,6 @@
             user-select: none;
         }
         
-        .checkbox-option,
-        .radio-option {
-            position: relative;
-        }
-        
-        .checkbox-option input[type="checkbox"],
-        .radio-option input[type="radio"] {
-            pointer-events: none;
-        }
-        
         .checkbox-option:has(input:checked),
         .radio-option:has(input:checked) {
             border-color: #25BAA8;
@@ -1326,8 +1316,8 @@
             </h2>
 
             <div class="question-group">
-                <label class="question-label">11. Du hast den Storypod nun erlebt. Welchen Preis empfindest du für das Starterset (Player + eine erste Figur/Karte) als fair?</label>
-                <input type="range" class="slider" min="69" max="139" value="104" name="Fairer Preis Starterset" oninput="updatePriceValue(this)" id="priceSlider">
+                <label class="question-label">11. Du hast den Storypod nun erlebt. Welchen Preis empfindest du für das Starterset (Player + eine erste Figur/Karte) als fair?<span class="required">*</span></label>
+                <input type="range" class="slider" min="69" max="139" value="104" name="Fairer Preis Starterset" data-touched="false" oninput="updatePriceValue(this)" id="priceSlider">
                 <div class="slider-labels">
                     <span>€69</span>
                     <span>€139</span>
@@ -2036,22 +2026,18 @@
             });
         });
 
-        // Checkbox/Radio option click handling
+        // Checkbox/Radio option click handling - macht das ganze Feld klickbar
         document.querySelectorAll('.checkbox-option, .radio-option').forEach(option => {
             option.addEventListener('click', function(e) {
-                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+                // Nur wenn auf den Container geklickt wird, nicht auf Input/Label
+                // (Input/Label haben ihre eigene Funktionalität)
+                if (e.target === this) {
                     const input = this.querySelector('input');
                     if (!input || input.disabled) {
                         return;
                     }
-                    if (input.type === 'radio') {
-                        input.checked = true;
-                    } else {
-                        input.checked = !input.checked;
-                    }
-                    // Trigger change event
-                    const event = new Event('change', { bubbles: true });
-                    input.dispatchEvent(event);
+                    // Klick simulieren auf dem Input
+                    input.click();
                 }
             });
         });
