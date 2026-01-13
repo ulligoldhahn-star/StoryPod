@@ -609,6 +609,8 @@
             color: white;
             width: 24px;
             height: 24px;
+            min-width: 24px;
+            min-height: 24px;
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
@@ -616,6 +618,7 @@
             font-size: 0.85em;
             font-weight: 600;
             margin-right: 12px;
+            flex-shrink: 0;
         }
 
         .note-text {
@@ -857,20 +860,20 @@
 
             /* Frage 13 - Abo Rating Mobile */
             .question-group > div[style*="display: flex"] {
-                flex-direction: column !important;
-                padding: 16px !important;
-                gap: 16px;
+                padding: 14px !important;
+                max-width: 100% !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
             }
 
             .question-group > div[style*="display: flex"] > span {
-                white-space: normal !important;
-                text-align: center;
-                font-size: 0.85em !important;
+                font-size: 0.75em !important;
+                white-space: nowrap !important;
             }
 
             .question-group > div[style*="display: flex"] .star-rating {
-                margin: 0 !important;
-                transform: scale(1.2);
+                margin: 0 10px !important;
+                transform: scale(0.9);
             }
         }
     </style>
@@ -1365,7 +1368,7 @@
             <div class="question-group">
                 <label class="question-label">13. Stell dir vor, es gäbe ein "Storypod Club-Abo" für 9,99 €/Monat, das dir jeden Monat neue, exklusive Inhalte freischaltet und Rabatte auf Zubehör gibt. Wie klingt das für dich?<span class="required">*</span></label>
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto; padding: 20px; border-radius: 12px; background: rgba(255, 255, 255, 0.85);">
-                    <span style="color: #6b7280; font-size: 0.9em; white-space: nowrap;">Absolut uninteressant</span>
+                    <span style="color: #6b7280; font-size: 0.9em; white-space: nowrap;">Uninteressant</span>
                     <div class="star-rating" style="margin: 0 20px;">
                         <input type="radio" name="Abo-Interesse" id="sub5" value="5" required>
                         <label for="sub5">★</label>
@@ -1378,7 +1381,7 @@
                         <input type="radio" name="Abo-Interesse" id="sub1" value="1">
                         <label for="sub1">★</label>
                     </div>
-                    <span style="color: #6b7280; font-size: 0.9em; white-space: nowrap;">Klingt super!</span>
+                    <span style="color: #6b7280; font-size: 0.9em; white-space: nowrap;">Super!</span>
                 </div>
             </div>
 
@@ -1905,7 +1908,12 @@
             selectedTuning.forEach((item, index) => {
                 if (item === 'Sonstiges' || item.startsWith('Sonstiges: ')) {
                     const currentText = item.startsWith('Sonstiges: ') ? item.substring(11) : '';
-                    html += `<div class="draggable-item" draggable="true" data-value="${item}"><span class="rank-badge">${index + 1}</span><span class="drag-handle">☰</span> Sonstiges: <input type="text" id="tuningSonstigesText" placeholder="Deine Idee..." value="${currentText}" style="border: 1px solid #d1d5db; border-radius: 6px; padding: 4px 8px; margin-left: 8px; width: 200px;" onclick="event.stopPropagation();"></div>`;
+                    html += `<div class="draggable-item" draggable="true" data-value="${item}" style="flex-wrap: wrap;">
+                        <span class="rank-badge">${index + 1}</span>
+                        <span class="drag-handle">☰</span>
+                        <span style="margin-right: 8px;">Sonstiges:</span>
+                        <input type="text" id="tuningSonstigesText" placeholder="Deine Idee..." value="${currentText}" style="border: 1px solid #d1d5db; border-radius: 6px; padding: 4px 8px; flex: 1; min-width: 150px;" onclick="event.stopPropagation();">
+                    </div>`;
                 } else {
                     html += `<div class="draggable-item" draggable="true" data-value="${item}"><span class="rank-badge">${index + 1}</span><span class="drag-handle">☰</span> ${item}</div>`;
                 }
