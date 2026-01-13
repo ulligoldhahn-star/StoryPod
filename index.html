@@ -1564,6 +1564,13 @@
             }
 
             if (currentPage === 4) {
+                // Validate price slider has been moved
+                const priceSlider = document.getElementById('priceSlider');
+                if (priceSlider && priceSlider.getAttribute('data-touched') === 'false') {
+                    showModal('Bitte bewege den Regler bei Frage 11, um einen fairen Preis anzugeben.');
+                    return;
+                }
+                
                 const aboRating = document.querySelector('input[name="Abo-Interesse"]:checked');
                 if (!aboRating) {
                     showModal('Bitte bewerte das Abo-Modell mit Sternen.');
@@ -1605,6 +1612,7 @@
             const priceDisplay = document.getElementById('priceValue');
             priceDisplay.textContent = '€' + slider.value;
             priceDisplay.style.color = '#25BAA8'; // Highlight that value has been set
+            slider.setAttribute('data-touched', 'true');
         }
 
         // Design rating conditional logic
