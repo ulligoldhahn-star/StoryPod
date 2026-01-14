@@ -1464,9 +1464,9 @@
 
     <div class="custom-modal" id="customModal">
         <div class="modal-content">
-            <div class="modal-icon">⚠️</div>
+            <div class="modal-icon">💙</div>
             <div class="modal-message" id="modalMessage"></div>
-            <button class="modal-button" onclick="closeModal()">OK</button>
+            <button class="modal-button" onclick="closeModal()">OK, verstanden</button>
         </div>
     </div>
 
@@ -1505,19 +1505,19 @@
             if (currentPage === 1) {
                 const familyChecked = document.querySelectorAll('input[name="Familie"]:checked');
                 if (familyChecked.length === 0) {
-                    showModal('Bitte wähle mindestens eine Option bei Frage 1 aus.');
+                    showModal('Für uns sind diese Daten sehr wichtig! Hilf uns bitte, indem du bei Frage 1 eine Option auswählst. Vielen Dank! 😊');
                     return;
                 }
                 
                 const genderChecked = document.querySelector('input[name="Geschlecht"]:checked');
                 if (!genderChecked) {
-                    showModal('Bitte gib an, wer diese Umfrage ausfüllt (Frage 2).');
+                    showModal('Deine Angaben helfen uns sehr weiter! Könntest du uns bitte noch bei Frage 2 sagen, wer diese Umfrage ausfüllt? Vielen Dank! 😊');
                     return;
                 }
                 
                 const ageChecked = document.querySelector('input[name="Alter"]:checked');
                 if (!ageChecked) {
-                    showModal('Bitte gib dein Alter an (Frage 3).');
+                    showModal('Fast geschafft auf dieser Seite! Könntest du uns noch kurz dein Alter bei Frage 3 mitteilen? Das wäre super! Vielen Dank! 😊');
                     return;
                 }
                 
@@ -1527,7 +1527,7 @@
                     const rowChecked = Array.from(document.querySelectorAll('input[name="Audio-Systeme"]:checked'))
                         .some(checkbox => checkbox.value.includes(system));
                     if (!rowChecked) {
-                        showModal(`Bitte wähle mindestens eine Option für ${system} bei Frage 4 aus.`);
+                        showModal(`Deine Meinung ist uns wichtig! Könntest du bitte noch eine Option für ${system} bei Frage 4 auswählen? Vielen Dank! 😊`);
                         return;
                     }
                 }
@@ -1536,7 +1536,7 @@
             if (currentPage === 2) {
                 const designRating = document.querySelector('input[name="Design Rating"]:checked');
                 if (!designRating) {
-                    showModal('Bitte bewerte das Design mit Sternen.');
+                    showModal('Wir sind gespannt auf deine Meinung! Könntest du das Design bitte noch mit Sternen bewerten? Vielen Dank! 😊');
                     return;
                 }
                 
@@ -1552,14 +1552,14 @@
                 
                 for (let item of hardwareSliders) {
                     if (item.slider.getAttribute('data-touched') === 'false') {
-                        showModal(`Bitte bewerte ${item.label} bei Frage 4.`);
+                        showModal(`Deine Einschätzung ist uns sehr wichtig! Könntest du bitte noch ${item.label} bei Frage 4 bewerten? Vielen Dank! 😊`);
                         return;
                     }
                 }
                 
                 const easeOfUse = document.querySelector('input[name="Bedienungsfreundlichkeit"]:checked');
                 if (!easeOfUse) {
-                    showModal('Bitte beantworte die Frage zur Bedienung.');
+                    showModal('Deine Meinung zur Bedienung interessiert uns sehr! Könntest du bitte noch die Frage zur Bedienungsfreundlichkeit beantworten? Vielen Dank! 😊');
                     return;
                 }
                 
@@ -1568,7 +1568,7 @@
                 if (tuningSonstiges && tuningSonstiges.checked) {
                     const tuningSonstigesText = document.getElementById('tuningSonstigesText');
                     if (!tuningSonstigesText || !tuningSonstigesText.value.trim()) {
-                        showModal('Bitte gib deine Idee für "Sonstiges" bei Frage 6 ein.');
+                        showModal('Wir sind gespannt auf deine Idee! Könntest du bitte noch deine eigene Idee bei "Sonstiges" (Frage 6) eintragen? Vielen Dank! 😊');
                         return;
                     }
                 }
@@ -1578,11 +1578,11 @@
                 const goals = document.querySelectorAll('input[name="Hauptziele"]:checked');
                 const appFeatures = document.querySelectorAll('input[name="App-Funktionen"]:checked');
                 if (goals.length === 0) {
-                    showModal('Bitte wähle mindestens ein Hauptziel aus.');
+                    showModal('Deine Ziele sind uns wichtig! Könntest du bitte noch mindestens ein Hauptziel auswählen? Vielen Dank! 😊');
                     return;
                 }
                 if (appFeatures.length === 0) {
-                    showModal('Bitte wähle mindestens eine App-Funktion aus.');
+                    showModal('Für ein optimales Produkt brauchen wir deine Meinung! Könntest du bitte noch mindestens eine App-Funktion auswählen? Vielen Dank! 😊');
                     return;
                 }
                 
@@ -1591,7 +1591,7 @@
                 if (hauptzieleSonstiges && hauptzieleSonstiges.checked) {
                     const hauptzieleText = document.getElementById('hauptzieleText');
                     if (!hauptzieleText || !hauptzieleText.value.trim()) {
-                        showModal('Bitte gib dein eigenes Hauptziel bei Frage 7 ein.');
+                        showModal('Wir sind gespannt auf dein persönliches Ziel! Könntest du es bitte noch bei Frage 7 eintragen? Vielen Dank! 😊');
                         return;
                     }
                 }
@@ -1601,7 +1601,7 @@
                 if (appFunktionenSonstiges && appFunktionenSonstiges.checked) {
                     const appFunktionenText = document.getElementById('appFunktionenText');
                     if (!appFunktionenText || !appFunktionenText.value.trim()) {
-                        showModal('Bitte gib deine eigene Wunschfunktion bei Frage 8 ein.');
+                        showModal('Deine Ideen helfen uns sehr! Könntest du bitte noch deine Wunschfunktion bei Frage 8 eintragen? Vielen Dank! 😊');
                         return;
                     }
                 }
@@ -1611,20 +1611,20 @@
                 // Validate price slider has been moved
                 const priceSlider = document.getElementById('priceSlider');
                 if (priceSlider && priceSlider.getAttribute('data-touched') === 'false') {
-                    showModal('Bitte bewege den Regler bei Frage 11, um einen fairen Preis anzugeben.');
+                    showModal('Deine Preiseinschätzung ist uns sehr wichtig! Könntest du bitte noch den Regler bei Frage 11 bewegen, um einen fairen Preis anzugeben? Vielen Dank! 😊');
                     return;
                 }
                 
                 const aboRating = document.querySelector('input[name="Abo-Interesse"]:checked');
                 if (!aboRating) {
-                    showModal('Bitte bewerte das Abo-Modell mit Sternen.');
+                    showModal('Wir sind gespannt auf deine Meinung zum Abo-Modell! Könntest du es bitte noch mit Sternen bewerten? Vielen Dank! 😊');
                     return;
                 }
                 const rating = parseInt(aboRating.value);
                 if (rating <= 3) {
                     const lowAboText = document.getElementById('lowAboText');
                     if (!lowAboText.value.trim()) {
-                        showModal('Bitte teile uns mit, was ein Abo-Modell für dich interessant machen würde.');
+                        showModal('Dein Feedback ist uns sehr wichtig! Könntest du uns bitte noch mitteilen, was ein Abo-Modell für dich interessant machen würde? Vielen Dank! 😊');
                         return;
                     }
                 }
