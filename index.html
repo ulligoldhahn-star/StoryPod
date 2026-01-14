@@ -1638,7 +1638,13 @@
             currentPage++;
             document.getElementById('page' + currentPage).classList.add('active');
             updateProgress();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Scroll to top - use setTimeout to ensure DOM is updated first
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            }, 10);
         }
 
         function prevPage() {
